@@ -1,0 +1,112 @@
+Handling special keyboard and mouse events are done using the Advanced User Interactions API. It contains the Actions and the Action classes that are needed when executing these events.
+
+Some Examples: Mouse double click, Drag and Drop, Handling tooltip, Mouse hover, entering uppercase letters in the textbook using Shift+Letters .
+
+Actions Class: Actions class is an API for performing complex user web interactions like double-click, right-click, etc. and it is the only choice for emulating Keyboard and Mouse interactions.
+
+Actions class implements the builder pattern. Builder Pattern is one of the design patterns. The intent of the Builder design pattern is to separate the construction of a complex object from its representation.
+
+What is the difference between Actions Class and Action Interface in Selenium?
+
+Actions is a class that is based on a builder design pattern.  This is a user-facing API for emulating complex user gestures.
+
+Whereas Action is an Interface which represents a single user-interaction action. It contains one of the most widely used methods perform().
+
+1. clickAndHold() -- Clicks (without releasing) at the current mouse location.
+2. contextClick() - Performs a context-click at the current mouse location. (Right Click Mouse Action)
+3. doubleClick() - Performs a double-click at the current mouse location.
+4. dragAndDrop(source, target) - Performs click-and-hold at the location of the source element, moves to the location of the target element, then releases the mouse.
+5. dragAndDropBy(source, x-offset, y-offset) - Performs click-and-hold at the location of the source element, moves by a given offset, then releases the mouse.
+6. moveToElement(toElement) - Moves the mouse to the middle of the element.
+7. release() - Releases the depressed left mouse button at the current mouse location
+8. sendKeys(onElement, charsequence) - Sends a series of keystrokes onto the element.
+9. keyDown(modifier_key) - Performs a modifier key press. Does not release the modifier key - subsequent interactions may assume it's kept pressed.
+10. keyUp(modifier _key) - Performs a key release.
+
+Selenium has the built-in ability to handle various types of keyboard and mouse events. In order to do action events, you need to use org.openqa.selenium.interactions Actions class. The user-facing API for emulating complex user gestures. Use the selenium actions class rather than using the Keyboard or Mouse directly. This API includes actions such as drag and drop, clicking multiple elements.
+
+To create an object ‘action‘ of Selenium Actions class, we use below command:
+Actions action=new Actions(driver);
+
+To focus on element using WebDriver:
+action.moveToElement(element).perform();
+element is the webelement which we capture
+
+perform() method is used here to execute the action.
+
+To click on the element:
+action.moveToElement(element).click().perform();
+click() method is used here to click the element.
+
+--------------------------------------------------------------------------------------------------------------------------
+Double click action in Selenium web driver can be done using Actions class.
+
+Right click operation is mostly used when performing right click on an element opens a new menu. Right click operation in Selenium web driver can be done using the pre-defined command Context Click
+
+Actions action = new Actions(driver);
+WebElement link = driver.findElement(By.ID ("Element ID"));
+action.contextClick(link).perform();
+
+Double click operation is used when the state of web element changes after double click operation. Double Click operation in Selenium web driver can be done using the pre defined command Double Click as mentioned below
+
+Actions action = new Actions(driver);
+WebElement link = driver.findElement(By.ID ("Element ID"));
+action. doubleClick (link).perform();
+
+Please refer below Program to understand how to perform double click and right click:
+
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.interactions.Actions;
+
+
+public class DoubleAndRightClick {
+
+ public static void main(String[] args) throws InterruptedException {
+
+ 
+  WebDriver driver;
+
+  System.setProperty("webdriver.chrome.driver","C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+
+  driver = new ChromeDriver();
+
+  driver.manage().window().maximize();
+
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+
+  Thread.sleep(1000);  
+
+  WebElement doubleClickBtn= driver.findElement(By.id("doubleClickBtn"));
+
+  WebElement rightClickBtn= driver.findElement(By.id("rightClickBtn"));  
+
+  Actions act= new Actions(driver);  
+
+  act.doubleClick(doubleClickBtn).perform();
+
+  System.out.println("Double clicked");
+
+  Thread.sleep(2000);
+
+  driver.switchTo().alert().accept();
+
+  Thread.sleep(2000);
+
+  act.contextClick(rightClickBtn).perform();
+
+  Thread.sleep(2000);
+
+  driver.close();
+
+ }
+
+}
+
+

@@ -1,0 +1,106 @@
+What are Locators?
+
+Locators provide a way to access the HTML elements from a web page. In Selenium, we can use locators to perform actions on the text boxes, links, checkboxes and other web elements. They are the basic building blocks of a web page.
+
+Locator Types:
+
+•	Selenium doesn’t have any inbuilt capability or mechanism to locate any UI elements on the Web Pages.
+•	In order to find UI elements on the Web Page, Selenium has to take the help of Locators.
+•	We have 8 types of locators in Selenium:
+1.	      id
+2.	      name
+3.	      className
+4.	      linkText
+5.	      partialLinkText
+6.	      tagName
+7.	      cssSelector
+8.	      xapth
+Locators can be classified into two categories:
+
+•	Structure-based locators: locators that rely on the structure of the page to find elements.
+      --XPath
+      --CSS
+
+•	Attributes-based locators: locators that relies on the attributes of the elements to locate them
+      --Id
+      --Name
+      --Link
+      --CSS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Locator Priorities
+
+ 
+Locator Priorities
+id Locator
+
+•	Where, driver is an web driver objectID locator is faster among all locators. So, if any web element has ID as an attribute we must use ID locator. ID should be unique in a web page.  ID locator is faster because at its roots, it calls “document.getElementById()”(A javaScript syntax) which is very much optimized by many browsers. Even ID helps in finding web element uniquely.
+•	Syntax - By.id("username")
+•	Example - driver.findElement(By.id("username"));
+      findElement is webdriver method
+      By - is a class
+      id - locator
+      username – value
+
+•	Pros - Each id is supposed to be unique so no chance of matching several elements
+•	Cons - Works well only on elements with fixed ids and not generated ones
+name Locator
+•	“Name” locator comes after ID. If any web element has not ID attribute, we can use name attribute if available.
+•	Syntax - By.name(“log")
+•	Example - driver.findElement(By.name(“log"));
+•	Pros -  Works well with fixed list of similar elements.
+•	Cons -  But it may not identify web element uniquely because it has multiple web elements can share same name.
+className Locator
+•	ClassName locator comes after name. If any web element has not ID and name attribute, we can use className attribute if available.
+•	Syntax - By.className("username")
+•	Example - driver.findElement(By.className("username"));
+•	Pros -  Works well with fixed list of similar elements.
+•	Cons -  But it may not identify web element uniquely because it has multiple web elements can share same name.
+
+linktext and partiallinktext Locator
+•	This Link Text locator works only on links (hyperlinks) so it is called as Link Text locator. 
+•	Partial Link Text: In some situations, we may need to find links by a portion of the text in a Link Text .
+•	Syntax and example: By.linkText("Forgot password"); By.partiallinkText("Forgot");
+•	Pros - Will only select anchor elements. Useful when testing navigation.
+•	Cons-  You have to know the text of the link before.
+tagName Locator
+•	A tagName is a part of a DOM structure where every element on a page is been defined via tag like input tag, button tag, anchor tag, etc. Each tag has multiple attributes like ID, name, value class, etc.
+•	Syntax and example: By.tagName("img");
+•	Pros - You can also use the tagName locator in combination with attribute value using XPath or CSS selectors. 
+•	Cons - In a simple basic scenario where an element is located just via tag, it may lead to a lot of values being identified and may cause issues. 
+cssSelector Locator
+•	CSS stands for Cascading Style Sheets. By using CSS selectors, we can find or select HTML elements on the basis of their id, class or other attributes. CSS is faster and simpler than Xpath particularly in case of IE browser where Xpath works very slowly.
+--Tag and ID
+--Tag and class
+--Tag and attribute
+--Tag, class, and attribute
+--Inner text - CSS in Selenium has an interesting feature of allowing partial string matches using ^, $, and *.
+•	Examples: 
+By.cssSelector("input#Email") 
+By.cssSelector("input.inputtext")
+By.cssSelector("input[name=Email]")
+By.cssSelector("input.inputtext[name=email]")
+•	Pros - It is faster. It also improves the performance. It is very compatible across browsers.CSS is best for IE as XPath does not work in IE always.
+•	Cons - Writing CSS is not simpler than XPath
+xpath Locator
+•	It is slowest among all locators. But it provides you reliable ways to locate web elements.
+•	Syntax - Xpath=//tagname[@attribute='value']
+•	Example - //input[@type='text']
+•	Pros - Allows very precise locators
+•	Cons - XPath engines are different in each browser, hence make them inconsistent across browsers. That means if you write XPath for your application in Chrome browser, it may not work on IE.
+

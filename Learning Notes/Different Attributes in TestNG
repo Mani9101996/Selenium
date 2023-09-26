@@ -1,0 +1,135 @@
+1. priority attribute :
+
+In TestNG "Priority" is used to schedule the test cases. When there are multiple test cases, we want to execute test cases in order. Like First we need to execute a test case "Registration" before login.
+In order to achive, we use need to add annotation as @Test(priority=??). The default value will be zero for priority.
+If you don't mention the priority, it will take all the test cases as "priority=0" and execute
+alphabetically.
+Lower priorities will be scheduled first.
+For example if you give the priority like @Test(priority=0), @Test(priority=-1), @Test(priority=1), @Test(priority=2)
+Then test will be executed in following order: @Test(priority=-1), @Test(priority=0), @Test(priority=1), @Test(priority=2)
+
+2. description attribute: gives information about the test it is attached to.
+Example: 
+@Test(description='Title Test')
+public void titleTest(){
+   String actualTitle = driver.getTitle();
+   String expectedTitle = "OrangeHRM";
+   Assert.assertEquals(actualTitle, expectedTitle);
+}
+
+3. timeOut: maximum number of milliseconds for a test run.
+Example: 5000 milliseconds (5 seconds) time allotted to run below test method.
+@Test(timeOut=5000)
+public void testCase(){
+
+}
+4. dependsOnMethods: specify when you want to run a test, only after another test has run successfully, making the second test’s run dependent on the first test’s successful outcome.
+Example:
+@Test(priority = 1)
+ public void testcase3() {
+  String actualUrl = driver.getCurrentUrl();
+  String expectedURL = "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
+  Assert.assertEquals(actualUrl, expectedURL);
+ }
+@Test(priority = 2, dependsOnMethods = "testcase3")
+  public void testcase4() {
+  String actualTitle = driver.getTitle();
+  String expectedTitle = "OrangeHRM";
+  Assert.assertEquals(actualTitle, expectedTitle);
+ }
+5. enabled: this attribute has boolean values, and by default is ‘true’. Only worth specifying explicitly when you don’t want a certain test method or class to be run, by setting the attribute to false.
+Example: Below test case will not be executed as specified enabled = false.
+@Test(enabled = false)
+  public void testcase4() {
+  String actualTitle = driver.getTitle();
+  String expectedTitle = "OrangeHRM";
+  Assert.assertEquals(actualTitle, expectedTitle);
+ }
+6. groups: useful for grouping together tests that relate to the same functionality, are of the same importance or are of the same type.
+
+7. alwaysRun- If set to true, this test method will always be run even if it depends on a method that failed.
+Example: Below testcase4 will always execute even it depends on a method that fails (testcase3)
+
+@Test(priority = 1)
+ public void testcase3() {
+  String actualUrl = driver.getCurrentUrl();
+  String expectedURL = "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
+  Assert.assertEquals(actualUrl, expectedURL);
+ }
+
+@Test(priority = 2, dependsOnMethods = "testcase3", alwaysRun = true)
+  public void testcase4() {
+  String actualTitle = driver.getTitle();
+  String expectedTitle = "OrangeHRM";
+  Assert.assertEquals(actualTitle, expectedTitle);
+ }
+8. invocationcount - The number of times this method should be invoked.
+Example: Below testcase3 will execute 3 times.
+@Test(priority = 4, description = "Verify URL", invocationCount = 3)
+  public void testcase3() {
+  String actualUrl = driver.getCurrentUrl();
+  String expectedURL = "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
+  Assert.assertEquals(actualUrl, expectedURL);
+ }
+
+9. How to ignore test case - We can ignore test at test, method and package levels
+Example:
+1. Test Level - Below test method will be ignored as @Ignore specified at Test Level
+@Ignore
+@Test(priority = 4, description = "Verify URL", invocationCount = 3)
+  public void testcase3() {
+  String actualUrl = driver.getCurrentUrl();
+  String expectedURL = "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
+  Assert.assertEquals(actualUrl, expectedURL);
+ }
+
+2. Class Level - All test methods will be ignored for this classe as @Ignore specified at class Level
+
+@Ignore
+public class OrangeHRMTest1 {
+ WebDriver driver;
+
+  @Test(priority = 1)
+  public void testcase1() {
+  driver.get("https://opensource-demo.orangehrmlive.com/index.php/auth/login");
+  boolean img = driver.findElement(By.xpath("//*[@id=\"divLogo\"]/img")).isDisplayed();
+  Assert.assertTrue(img);
+ }
+
+  @Test(priority = 2)
+  public void testcase2() {
+  String actualTitle = driver.getTitle();
+  String expectedTitle = "OrangeHRM";
+  Assert.assertEquals(actualTitle, expectedTitle);
+ }
+ 
+}
+
+3. Package Level - All test classes will be ignored under this package
+Example
+@org.testng.annotations.Ignore
+package testNGPackage;
+
+10. @Test annotation at Class Level - TestNG has great feature to define annotations on a class instead of a each test method.
+If say suppose there are 10 test methods, where adding @Test on a class level is simpler than adding @Test for each method.
+When we make class level @Test annotation, all the public methods of this class will become test methods even if they are not annotated.
+We can still define @Test annotation on of the method if we want to add any attributes to particular test method.
+
+Example:
+
+@Test
+public class OrangeHRMTest {
+ WebDriver driver;
+
+ @BeforeClass
+ public void setup() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+ }
+public void testCase1(priority=1) {
+ }
+public void testCase2(priority=2) {
+ }
+}

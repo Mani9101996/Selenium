@@ -1,0 +1,73 @@
+
+
+What is DOM?
+
+•	Is the HTML you write the DOM?
+Answer is No, But the HTML you write is parsed by the browser and turned into the DOM.
+
+•	Is ‘View Page Source’ the DOM?
+Answer is No, View Source just shows you the HTML that makes up that page. It's probably the exact HTML that you wrote.
+
+•	Is the Code in Dev Tools the DOM?
+Answer is Yes,  We can say that that is a visual representation of the DOM!
+
+When is the DOM different than the HTML?
+
+•	If there are mistakes in your HTML that will be fixed by the browser for you.
+•	Let's say you have a <table> element in your HTML and leave out the required <tbody> element. The browser will just insert that <tbody> for you. It will be there in the DOM, so you'll be able to find it with JavaScript and style it with CSS, even though it's not in your HTML.
+DOM Definition:
+•	When a web page is loaded, browser creates a tree of objects on web page is called DOcument Object Model (DOM).
+•	The DOM (Document Object Model) is an interface (API) that represents how your HTML and XML documents are read by the browser. It allows a language (JavaScript) to manipulate, structure, and style your website. After the browser reads your HTML document, it creates a representational tree called the Document Object Model and defines how that tree can be accessed.
+•	The Document Object Model (DOM) is a programming API for HTML and XML documents. It defines the logical structure of documents and the way a document is accessed and manipulated.
+•	With the Document Object Model, programmers can create and build documents, navigate their structure, and add, modify, or delete elements and content. Anything found in an HTML or XML document can be accessed, changed, deleted, or added using the Document Object Model.
+In the beginning, JavaScript and the DOM were tightly intertwined, but eventually, they evolved into separate entities. The page content is stored in the DOM and may be accessed and manipulated via JavaScript, so that we may write this equation:
+
+API (HTML or XML page) = DOM + JS (scripting language)
+
+--The DOM was designed to be independent of any particular programming language
+--The DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript
+
+
+
+
+
+
+
+
+
+Simple DOM Tree:
+ 
+Simple DOM Tree
+
+
+
+In Above Image:
+
+
+Element node: An element, as it exists in the DOM.
+Root node: The top node in the tree, which in the case of HTML is always the HTML node (other markup vocabularies like SVG and custom XML will have different root elements).
+Child node: A node directly inside another node. For example, IMG is a child of SECTION in the above example.
+Descendant node: A node anywhere inside another node. For example, IMG is a child of SECTION in the above example, and it is also a descendant. IMG is not a child of BODY, as it is two levels below it in the tree, but it is a descendant of BODY.
+Parent node: A node which has another node inside it. For example, BODY is the parent node of SECTION in the above example.
+Sibling nodes: Nodes that sit on the same level in the DOM tree. For example, IMG and P are siblings in the above example.
+Text node: A node containing a text string.
+
+
+
+
+
+
+
+HTML DOM Methods:
+
+getElementById()
+getElementsByClassName()
+getElementsByName()
+getElementsByTagName()
+querySelector()
+querySelectorAll()
+
+Advantage for Programmers:
+
+By manipulating the DOM, you have infinite possibilities. You can create applications that update the data of the page without needing a refresh. Also, you can create applications that are customizable by the user and then change the layout of the page without a refresh. You can drag, move, and delete elements.
+

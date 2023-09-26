@@ -1,0 +1,45 @@
+What is XPath?
+
+
+•	XPath is XML Path Language which is used to traverse through the XML file and finding the desired information web element on the web page using XML path expression.
+•	Since the structure of HTML is similar to XML, we can use XPath language even to traverse through HTML tags and get the desired information.
+•	XPath expressions are the one of the locator types that can be used for locating the UI elements on the web pages
+
+Syntax:  XPath=//tagname[@attribute='value']
+
+Where:
+// : Select current node.
+Tagname: Tagname of the particular node.
+@: Select an attribute.
+Attribute: Attribute name of the node like name, id etc.
+Value: Value of the attribute.
+
+Types of XPath:
+•	Absolute
+•	Relative XPath
+Absolute XPath - Absolute XPath tries to locate the element from the root. i.e. complete path The disadvantage of the absolute XPath is that if there are any changes made in the path of the element then that XPath gets failed. it begins with the single forward slash(/).  
+
+Example: /html/body/p[@id=’user123′]
+
+Relative XPath - Unlike Absolute XPath, Relative XPath tries to locate the element directly, instead of locating from root. It webpage. starts with the double forward slash (//), which means it can search the element anywhere at the 
+
+Example: //p[@id=’user123′]
+
+Basic XPath:
+
+1. Using Basic Attributes-- Basic XPath select nodes or list of nodes on the basis of attributes like ID , Name, Classname, etc.
+Example: XPath=//input[@name='uid']
+
+2. Contains() - Contains() is a method used in XPath expression. It is used when the value of any attribute changes dynamically, for example, login information.
+Example: XPath=//*[contains(@type,‘user')]
+
+3. Using OR & AND Operator:
+ XPath=//*[@type='submit' or @name='btnReset']
+ XPath=//input[@type='submit' and @name='btnLogin']
+
+4. Start-with function: Start-with function finds the element whose attribute value changes on refresh or any operation on the webpage.
+ XPath=//label[starts-with(@id,'message')]
+
+5. Text(): In this expression, with text function, we find the element with exact text match
+XPath=//input[text()=‘username']
+

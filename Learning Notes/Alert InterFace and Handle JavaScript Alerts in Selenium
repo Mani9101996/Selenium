@@ -1,0 +1,131 @@
+What is an Alert?
+
+•	Alert is a small message box which displays on-screen notification to give the user some kind of information or ask for permission to perform certain kind of operation. It may be also used for warning purpose.
+•	There are many user actions that can result in an alert on screen. For e.g. user clicked on a button that displayed a message or may be when you entered a form, HTML page asked you for some extra information. So in this video we will learn Handling of Alerts, JavaScript Alerts and PopUp Boxes.
+There are two types of alerts that we would be focusing on majorly:
+•	Web-based alert pop-ups
+•	Windows-based alert pop-ups
+Handling windows based pop-ups is beyond Web Driver's capabilities, thus we would exercise some third-party utilities to handle window pop-ups.
+
+Types of Web Based/Java Script Alerts
+Java scrip provides mainly following three types of alerts:
+
+1. Simple alert("This is a simple alert");
+2. confirmation alert- confirm("Confirm pop up with OK and Cancel button");
+3. prompt- prompt("Do you like ATI?", "Yes/No");
+
+There are the four methods that we would be using along with the Alert interface.
+•	void dismiss() – The dismiss() method clicks on the “Cancel” button as soon as the pop up window appears.
+•	void accept() – The accept() method clicks on the “Ok” button as soon as the pop up window appears.
+•	String getText() – The getText() method returns the text displayed on the alert box.
+•	void sendKeys(String stringToSend) – The sendKeys() method enters the specified string pattern into the alert box.
+Simple Alert Program:
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SimpleAlertDemo {
+
+ public static void main(String[] args) throws InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  driver.findElement(By.id("simpleAlert")).click();
+  Alert alert=driver.switchTo().alert();
+  String alertText=alert.getText();
+  System.out.println("Alert Text is: "+alertText);
+  Thread.sleep(2000);
+  alert.accept();
+  driver.close();
+ }
+}
+
+Output:
+Alert Text is: Simple Alert
+
+This is a Simple Alert
+
+Confirmation Alert Demo:
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ConfirmationAlertDemo {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  // Thread.sleep(2000);
+
+  driver.findElement(By.id("confirmationAlert")).click();
+
+  if (isAlertPresent(driver)) {
+   System.out.println("Alert is present");
+  } else {
+   System.out.println("Alert is not present");
+  }
+  driver.close();
+ }
+
+ public static boolean isAlertPresent(WebDriver ldriver) {
+
+  try {
+   Alert alert = ldriver.switchTo().alert();
+   String alerteTxt = alert.getText();
+   alert.accept();
+   //alert.dismiss();
+  } catch (NoAlertPresentException e) {
+   // TODO Auto-generated catch block
+  }
+  return false;
+ }
+}
+
+Output:
+Alert is present
+
+Prompt Alert Demo:
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class PromptAlertDemo {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.gecko.driver",
+    "C:\\Users\\Hitendra\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe");
+  driver = new FirefoxDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(3000);
+  driver.findElement(By.id("promptAlert")).click();
+  Alert alert = driver.switchTo().alert();
+  Thread.sleep(2000);
+  String alertText = alert.getText();
+  System.out.println("Alert Text is: " + alertText);
+  alert.sendKeys("Yes");
+  Thread.sleep(2000);
+  alert.accept();
+  driver.close();
+ }
+}
+
+Output:
+Alert Text is: Do you like ATI?
+

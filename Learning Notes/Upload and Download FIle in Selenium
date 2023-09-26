@@ -1,0 +1,181 @@
+There are different ways to upload files in Selenium like:
+
+•	      Using sendkeys() method
+•	      Using AutoIT tool
+•	      Using Robot Class
+Using sendKeys() method:
+Uploading files in WebDriver is done by simply using the sendKeys() method on the file-select input field to enter the path to the file to be uploaded.
+Let's say we wish to upload the file "C:\\Users\\Hitendra\\Desktop\\TestFile.txt". Our WebDriver code should be like the one shown below.
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class UploadFileUsingSendkeys {
+
+ public static void main(String[] args) throws InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  Actions act= new Actions(driver); 
+  WebElement chooseFile=driver.findElement(By.id("fileupload1"));
+  act.moveToElement(chooseFile).perform(); 
+  Thread.sleep(1000); 
+  chooseFile.sendKeys("C:\\Users\\Hitendra\\Desktop\\TestFile.txt");
+ }
+}
+
+Using AutoIT tool:
+(refer YouTube video on Introduction to AutoIT tool --https://www.youtube.com/watch?v=be05PN2XW3k&list=PLsGOlyTzNH6f_pZuGZDFjI5IeCWGQqiwF&index=32 )
+
+We need three tools in order to upload file using selenium.
+
+
+•	Selenium Webdriver
+•	AutoIT editor and element identifier
+•	The window that you want to automate
+Open AutoIT script editor,and start writing a script for selecting a file to upload.
+
+There are lots of method available which we can use in a script according to the requirement, but right now we will focus on the below methods as these methods are required for writing file upload script:
+
+
+ControlFocus(" title "," text ",controlID ) //Sets input focus to a given control on a window.
+ControlSetText(" title "," text ",controlID ," File path which need to upload " ) // Sets text of a control.
+ControlClick(" title "," text ",controlID ) //Sends a mouse click command to a given control.
+
+Refer below Image:
+ 
+Sample AutoIT Script
+Please refer below YouTube video (at the end of this article)  on how to upload file using AutoIT tool.
+
+Complete program to upload file using AutoIT tool in Selenium:
+
+import java.io.IOException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class UploadUsingAutoIT {
+
+ public static void main(String[] args) throws InterruptedException, IOException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  Actions act= new Actions(driver); 
+  WebElement chooseFile=driver.findElement(By.id("fileupload1"));
+  act.moveToElement(chooseFile).click().perform();
+  Thread.sleep(2000);
+  Runtime.getRuntime().exec("C:\\Users\\Hitendra\\Desktop\\UploadFile.exe");
+ }
+}
+
+Using Robot Class:
+We have discussed uploading a file using using Webdriver Sendkeys method and Using AutoIT Tool. Now here we will look into an other way of doing file upload using Robot class and StringSelection class in java.
+
+In certain Selenium Automation Tests, there is a need to control keyboard or mouse to interact with OS windows like Download pop-up, Alerts, Print Pop-ups, etc. or native Operation System applications like Notepad, Skype, Calculator, etc.
+
+
+Selenium Webdriver cannot handle these OS pop-ups/applications. In Java version 1.3 Robot Class was introduced. Robot Class can handle OS pop-ups/applications.
+
+Robot class is a separate class in Java which will allow us to perform multiple tasks based on our requirement. It generally will throw AWT exception so we need to deal with it accordingly. Using Robot class, we can simulate keyboard event in Selenium. To use keyboard events you have to use to a method of Robot class.
+Robot class is used to (generate native system input events) take the control of mouse and keyboard. Once you get the control, you can do any type of operation related to mouse and keyboard through with java code.
+
+There are different methods which robot class uses. Here in the below example we have used 'keyPress' and 'keyRelease' methods.
+
+keyPress - takes keyCode as Parameter and Presses here a given key.
+keyrelease - takes keyCode as Parameterand Releases a given key
+
+We will follow below steps:
+Step 1- We have to copy the file location in system clipboard.
+Step 2- We have to click on upload button and use CTR+V and ENTER.
+Note- Robot class each key has to press and release respectively
+
+Complete program given below
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class UploadFileUsingRobot {
+
+ public static void main(String[] args) throws InterruptedException, AWTException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  Actions act= new Actions(driver);
+  WebElement chooseFile=driver.findElement(By.id("fileupload1"));
+  act.moveToElement(chooseFile).click().perform();
+  Thread.sleep(2000);
+  uploadFile("C:\\Users\\Hitendra\\Desktop\\TestFile.txt");
+ }
+ 
+ public static void setClipBoard(String file) {
+  StringSelection obj= new StringSelection(file);
+  Toolkit.getDefaultToolkit().getSystemClipboard().setContents(obj, null);
+ }
+ 
+ public static void uploadFile(String filePath) throws AWTException {
+  setClipBoard(filePath);
+  Robot rb= new Robot();
+  rb.keyPress(KeyEvent.VK_CONTROL);
+  rb.keyPress(KeyEvent.VK_V);
+  rb.keyRelease(KeyEvent.VK_CONTROL);
+  rb.keyRelease(KeyEvent.VK_V);
+  rb.keyPress(KeyEvent.VK_ENTER);
+  rb.keyRelease(KeyEvent.VK_ENTER);
+ }
+}
+
+DownLoadFile file using ChromeOptions Class: Please refer below program to download file on chrome browser using ChromeOptions Class.
+import java.util.HashMap;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
+
+public class DownLoadFile {
+ static WebDriver driver;
+ public static void main(String[] args) {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        String downloadFilepath = "C:\\Users\\Hitendra\\Downloads";
+        HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+        chromePrefs.put("profile.default_content_settings.popups", 0);
+        chromePrefs.put("download.default_directory", downloadFilepath);
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("prefs", chromePrefs);
+        options.addArguments("--test-type");
+        options.addArguments("--disable-extensions"); //to disable browser extension popup
+        options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+        driver = new ChromeDriver(options);  
+                 driver.get("http://www.seleniumhq.org/download/");
+                 driver.findElement(By.linkText("32 bit Windows IE")).click();
+ }
+}
+

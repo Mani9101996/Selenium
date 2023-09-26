@@ -1,0 +1,31 @@
+For automation testers, identifying elements and performing actions is an important task. To make it easier, the concept called Locators was introduced in Selenium. But manually locating elements is a time-consuming task due to the complexity of the DOM structure of a webpage. This is where ChroPath comes into the picture and eases the task of locating elements in Selenium. In this article we will talk about chropath and its features.
+
+What is ChroPath?
+
+ChroPath is a development tool to edit, inspect and generate XPath and CSS selectors. ChroPath makes it easy to write, edit, extract, and evaluate XPath and CSS queries on any webpage and saves atleast 40–50% manual effort in automation script writing.
+
+Browser Support: Chrome/Mozilla
+
+Features:
+
+1.	Generate locators in seconds: Inspect the element or click on dom node to generate unique locators
+2.	iframe Support: Generate and verify locators inside iframe, Dynamic ID and Dark Theme Support.
+3.	Editor: Verify locators and get all matching node extracted in one place.
+4.	Verify and Modify Locators.
+5.	You can record multiple selectors and store locators and export data in xls file.
+
+How to use ChroPath:
+
+It mainly involves four steps:
+1.	Add ChroPath extension to Google Chrome/Mozilla Firefox.
+2.	Inspect element and choose ChroPath.
+3.	Copy the required XPath and CSS Selector from ChroPath menu.
+4.	Use the copied XPath/CSS in your selenium script and execute your program.
+
+
+MRI is a bookmarklet for Internet Explorer 6+, and Webkit and Mozilla based browsers (including Safari, Firefox, Camino or Mozilla).
+
+MRI is a free cross browser tool that lets you test selectors with any web page. Selectors, particularly complex ones can be difficult to get exactly right - MRI lets you experiment with them on any web page (local or online, static or dynamic).
+
+
+

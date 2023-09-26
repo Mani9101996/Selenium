@@ -1,0 +1,99 @@
+In many web pages, it’s very common that when hovered over some link, text, some text or sometimes image gets displayed. For example, in Gmail inbox, if hovered over right-hand side menu options, small “hover box”  with text gets displayed. This is called a tooltip of web element.
+
+This text usually is a brief description of the functionality of the object or in some cases, it displays a detailed description of the object. In some cases, it may display only the full name of the object. So basically, the purpose of a tooltip is to provide some hint to the user about the object. In many instances, it is required to verify if this text description being displayed as expected.
+
+Please refer below Program to understand how to handle tooltip in Selenium:
+
+Program1 (without actions class when title attribute present for the element):
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class ToolTipDemo {
+
+ public static void main(String[] args) throws InterruptedException {
+
+ 
+  WebDriver driver;
+
+  System.setProperty("webdriver.chrome.driver",
+
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+
+  driver = new ChromeDriver();
+
+  driver.manage().window().maximize();
+
+  driver.get("https://www.automationtestinginsider.com/");
+
+  Thread.sleep(1000); 
+
+  WebElement searchBox=driver.findElement(By.xpath("//input[@class='gsc-input']"));
+
+ 
+  String tooltipText=searchBox.getAttribute("title");
+ 
+
+  System.out.println("Tooltip text is: "+tooltipText); 
+
+  driver.close();
+
+ }
+
+}
+
+Program2(using Actions Class):
+
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.interactions.Actions;
+
+
+public class ToolTipDemo1 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+ 
+  WebDriver driver;
+
+  System.setProperty("webdriver.chrome.driver",
+
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+
+  driver = new ChromeDriver();
+
+  driver.manage().window().maximize();
+
+  driver.get("http://demoqa.com/tooltip-and-double-click/");
+
+  Thread.sleep(1000);
+  
+  Actions act= new Actions(driver);
+ 
+  WebElement mouseHover=driver.findElement(By.id("tooltipDemo"));
+  
+  act.moveToElement(mouseHover).perform();
+  
+  WebElement tooltipMsg=driver.findElement(By.xpath("//span[@class='tooltiptext']"));
+
+
+  System.out.println("Tooltip Message is: "+tooltipMsg.getText());
+
+ 
+  driver.close();
+
+ }
+
+}
+

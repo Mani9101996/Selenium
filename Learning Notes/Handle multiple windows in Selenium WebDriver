@@ -1,0 +1,69 @@
+we will see how to handle multiple windows using Selenium WebDriver. In real time, we face many scenarios, where an application throws multiple popups. We can easily achieve this using Windows Handles in Selenium WebDriver. We use ‘Switch To’ method which allows us to switch control from one window to other.
+
+Below scenarios covered in this file:
+
+ How to get total windows and print them. 
+ How to switch to child window and perform action.
+ Come back (switch) to parent window.
+ Create a Program (Library) which will handle multiple windows.
+ Create a Program (Library) which will handle different tabs.
+ How to switch through index.
+What is a window handle?
+A window handle is a unique identifier that holds the address of all the windows. This is basically a pointer to a window, which returns the string value. This window handle function helps in getting the handles of all the windows. It is guaranteed that each browser will have a unique window handle.
+
+Methods and Commands:
+get.windowhandle(): helps in getting the window handle of the current window
+get.windowhandles(): helps in getting the handles of all the windows opened
+set: helps to set the window handles which is in the form of a string. 
+set<string> set=driver.get.windowhandles();
+switch to: helps in switching between the windows
+action: helps to perform certain actions on the windows.
+
+Please refer complete program below:
+------------------------------------------------------------------------------------------
+import java.util.Iterator;
+import java.util.Set;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WindowHandle1 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  // To open Naukri.com with multiple windows
+  driver.get("https://www.naukri.com/");
+  Thread.sleep(2000);
+  // It will return the parent window name as a String
+  String parentWinID = driver.getWindowHandle();
+  System.out.println("Parent Win ID is: " + parentWinID);
+  // It returns no. of windows opened by WebDriver and will return Set of Strings
+  Set<String> allWinID = driver.getWindowHandles();
+  System.out.println("Total Window size:" +allWinID.size());
+  System.out.println("All win IDs are:");
+  for (String allIDs : allWinID) {
+   System.out.println(allIDs);
+  }
+  // Using Iterator to iterate with in windows
+  Iterator<String> itr = allWinID.iterator();
+  while (itr.hasNext()) {
+   String childWinID = itr.next();
+   // Compare whether the main window is not equal to child window. If not equal, we will close child windows.
+              if(!parentWinID.equalsIgnoreCase(childWinID)) {
+               driver.switchTo().window(childWinID);
+               System.out.println("Child URL is:"+driver.getCurrentUrl());
+               System.out.println("Child Win Title is:"+driver.getTitle());
+               Thread.sleep(2000);
+               driver.close();
+              }
+  }
+  // This is to switch to the main window
+  driver.switchTo().window(parentWinID);
+  driver.quit();
+ }
+}
+-------------------------------------------------------------------------------

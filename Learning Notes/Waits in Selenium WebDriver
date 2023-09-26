@@ -1,0 +1,366 @@
+Different wait commands in selenium:
+In selenium "Waits" play an important role in executing tests. Selenium waits can be classified as below, we will discuss each wait in detail:
+
+Classification of Selenium Waits
+Why do we need waits in Selenium?
+Most web applications are developed with Ajax and Javascript. When a page loads on a browser, the various web elements that someone wants to interact with may load at various time intervals.
+This obviously creates difficulty in identifying any element. On top of that, if an element is not located then the “ElementNotVisibleException/NoSuchElementException” appears.
+
+Please have a look at below image:
+
+
+In above web page we have a button 'Click Me', after clicking on that button, a message appears after waiting for 5 seconds.
+Page Link: https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html
+Let's consider this scenario and write a script without using any waiting commands in selenium.
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Demo1 {
+
+ public static void main(String[] args) {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  WebElement ele=driver.findElement(By.xpath("//div[text()='Welcome To Automation Testing Insider']"));
+  String text=ele.getText();
+  System.out.println("The msg is: "+text);
+  driver.close();
+ }
+}
+
+Output:
+
+Starting ChromeDriver 79.0.3945.36 (3582db32b33893869b8c1339e8f4d9ed1816f143-refs/branch-heads/3945@{#614}) on port 16094
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Feb 21, 2020 3:22:49 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Exception in thread "main" org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//div[text()='Welcome To Automation Testing Insider']"}
+  (Session info: chrome=79.0.3945.130)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'HITENDRA-PC', ip: '169.254.161.182', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_162'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.130, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: C:\Users\Hitendra\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59460}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: b49a3b9faf99bfbcc99834650e0182ff
+*** Element info: {Using=xpath, value=//div[text()='Welcome To Automation Testing Insider']}
+ at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+ at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+ at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+ at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+ at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+ at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+ at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+ at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:323)
+ at org.openqa.selenium.remote.RemoteWebDriver.findElementByXPath(RemoteWebDriver.java:428)
+ at org.openqa.selenium.By$ByXPath.findElement(By.java:353)
+ at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:315)
+ at WaitsDemo.Demo1.main(Demo1.java:20)
+
+
+So you can see in the above program we got 'NoSuchElementException' if we do not use wait commands in such scenarios. Now lets talk about Synchronization and later on we will handle the above scenario using different wait commands.
+
+Basically in Test Automation, we have two components:
+ Application Under Test
+ Test Automation Tool
+Both these components will have their own speed. We should write our scripts in such a way that both the components should move with same and desired speed, so that we will not encounter "Element Not Found" errors.
+
+So Synchronization  is a mechanism which involves more than one components to work parallel with Each other.
+
+Synchronization can be classified into two categories:
+ Unconditional – Thread.sleep() wait
+ Conditional Synchronization – Implicit, Explicit and Fluent wait
+
+Why use wait commands?
+Wait commands direct test scripts to pause for a certain time before throwing exceptions.
+Selenium WebDriver provides three commands to implement wait in tests.
+
+Implicit Wait - Implicit waits are used to provide a default waiting time (say 30 seconds) between each consecutive test step/command across the entire test script. Implicitly wait is applied globally, which means it is always available for all the web elements throughout the driver instance. It implies that if the driver is interacting with 100 elements, then implicitly wait is applicable for all the 100 elements.
+
+Syntax: driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS);
+
+Please consider the below program code and usage of implicitly code.
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Demo3 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  WebElement ele = driver.findElement(By.xpath("//div[text()='Welcome To Automation Testing Insider']"));
+  String text = ele.getText();
+  System.out.println("The msg is: " + text);
+  driver.close();
+ }
+}
+
+Output
+The msg is: Welcome To Automation Testing Insider
+
+In the above code, I have given an implicit wait at 30 seconds, which implies that the maximum wait time is 30 seconds for the particular element to load or to arrive at the output. Implicit wait is a dynamic wait.
+What are dynamic waits?
+Implicit, Explicit, and Fluent waits are dynamic waits.  Consider a situation where you have given a TimeOut value of 30 seconds. If the element is loaded in 5 seconds, then rest 25 seconds will be ignored. It won’t wait until the TimeOut value is completed, i.e 30 seconds. That’s why all waits are considered as dynamic waits.
+
+Explicit Wait - Explicit waits are used to halt the execution until the time a particular condition is met or the maximum time has elapsed. Explicit waits are a concept from the dynamic wait, which waits dynamically for specific conditions. It can be implemented by the WebDriverWait class. To understand the explicit wait in Selenium WebDriver, you should know the requirements and why we use wait statements in programs.
+
+In order to declare explicit wait, one has to use “ExpectedConditions”. The following Expected Conditions can be used in Explicit Wait.
+
+alertIsPresent()
+elementSelectionStateToBe()
+elementToBeClickable()
+elementToBeSelected()
+frameToBeAvaliableAndSwitchToIt()
+invisibilityOfTheElementLocated()
+invisibilityOfElementWithText()
+presenceOfAllElementsLocatedBy()
+presenceOfElementLocated()
+textToBePresentInElement()
+textToBePresentInElementLocated()
+textToBePresentInElementValue()
+titleIs()
+titleContains()
+visibilityOf()
+visibilityOfAllElements()
+visibilityOfAllElementsLocatedBy()
+visibilityOfElementLocated()
+
+Syntax:
+WebDriverWait wait= new WebDriverWait(driver, 5);
+        WebElement ele=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(“xpath")));
+
+Example – Suppose I have a web page that has some login form, and after login, it takes a lot of time to load the account or home page. This page is dynamic — it means that sometimes it takes 10 seconds to load the homepage, and sometimes, it’s 15 seconds and so on. In such situations, explicit wait helps us to wait until a specific page is not present.
+
+Please refer below example code, here we have created an object of WebDriver wait and passed the driver reference and timeout as parameters. However in below example i have created user defined method findElement which we can use for any web elements.
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Demo4 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  String xpath="//div[text()='Welcome To Automation Testing Insider']";
+  WebElement ele=findElement(driver,xpath,10);
+  String text = ele.getText();
+  System.out.println("The msg is: " + text);
+  driver.close();
+ }
+ 
+ public static WebElement findElement(WebDriver driver1, String xpath1, int timeout) {
+  WebElement ele=new WebDriverWait(driver1, timeout).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath1)));
+  return ele;
+ }
+}
+
+Output:
+The msg is: Welcome To Automation Testing Insider
+
+Fluent Wait - The Fluent Wait command defines the maximum amount of time for Selenium WebDriver to wait for a certain condition to appear. It also defines the frequency with which WebDriver will check if the condition appears before throwing the “ElementNotVisibleException”.
+
+
+Syntax:
+Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+.withTimeout(Duration.ofSeconds(40))
+.pollingEvery(Duration.ofSeconds(8))
+.ignoring(Exception.class);
+
+   WebElement ele = wait.until(new Function<WebDriver, WebElement>() {
+     public WebElement apply(WebDriver driver) {
+       return driver.findElement(By.xpath(“xpath"));
+     }
+   });
+
+Example: Let's consider a scenario where an element is loaded at different intervals of time. The element might load within 10 seconds, 20 seconds or even more then that if we declare an explicit wait of 20 seconds. It will wait till the specified time before throwing an exception. In such scenarios, the fluent wait is the ideal wait to use as this will try to find the element at different frequency until it finds it or the final timer runs out.
+
+Please refer below example code:
+import java.time.Duration;
+import java.util.function.Function;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+public class Demo5 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  String xpath="//div[text()='Welcome To Automation Testing Insider']";
+  Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+    .withTimeout(Duration.ofSeconds(20))
+    .pollingEvery(Duration.ofSeconds(2))
+    .ignoring(Exception.class);
+
+       WebElement ele = wait.until(new Function<WebDriver, WebElement>() {
+         public WebElement apply(WebDriver driver) {
+           return driver.findElement(By.xpath(xpath));
+         }
+       });
+  String text = ele.getText();
+  System.out.println("The msg is: " + text);
+  driver.close();
+ }
+}
+
+Output
+The msg is: Welcome To Automation Testing Insider
+
+Some other waits are: 
+PageLoadTimeOut - One of the timeouts is focused on the time a webpage needs to be loaded – the pageLoadTimeout limits the time that the script allots for a web page to be displayed. Page load timeout is useful when we perform a performance test. Page Load timeout is applicable only to driver.get() and driver.navigate().to() methods in selenium.
+
+Syntax:  driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+
+Consider below example where we used PageLoadTimeOut to limit the page to be loaded in 5 seconds but page did not load in 5 seconds and throws TimeoutException exception.
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Demo2 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  Thread.sleep(5000);
+  WebElement ele = driver.findElement(By.xpath("//div[text()='Welcome To Automation Testing Insider']"));
+  String text = ele.getText();
+  System.out.println("The msg is: " + text);
+  driver.close();
+ }
+}
+
+Output
+Starting ChromeDriver 79.0.3945.36 (3582db32b33893869b8c1339e8f4d9ed1816f143-refs/branch-heads/3945@{#614}) on port 31941
+Only local connections are allowed.
+Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
+Feb 21, 2020 3:51:50 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+[1582280516.761][SEVERE]: Timed out receiving message from renderer: 0.015
+[1582280516.791][SEVERE]: Timed out receiving message from renderer: -0.031
+Exception in thread "main" org.openqa.selenium.TimeoutException: timeout
+  (Session info: chrome=79.0.3945.130)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:25:48'
+System info: host: 'HITENDRA-PC', ip: '169.254.161.182', os.name: 'Windows 7', os.arch: 'amd64', os.version: '6.1', java.version: '1.8.0_162'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.130, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: C:\Users\Hitendra\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59888}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 2465cdde761b595d659c73ff38c7aa58
+ at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+ at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+ at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+ at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:187)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:122)
+ at org.openqa.selenium.remote.http.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:49)
+ at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:158)
+ at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:83)
+ at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:552)
+ at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:277)
+ at WaitsDemo.Demo2.main(Demo2.java:20)
+
+
+
+Thread.sleep() - Sleep is a static method that belongs to the thread class. This method can be called using the reference of the class name i.e Thread. If you use Thread.sleep while performing automation testing with Selenium, then this method will stop the execution of the script for the specified duration of time, irrespective of whether the element is found or not on the web page.
+
+Syntax: Thread.sleep(5000);
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Demo2 {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  driver.findElement(By.id("testWait123")).click();
+  Thread.sleep(10000);
+  WebElement ele = driver.findElement(By.xpath("//div[text()='Welcome To Automation Testing Insider']"));
+  String text = ele.getText();
+  System.out.println("The msg is: " + text);
+  driver.close();
+ }
+}
+
+Output
+The msg is: Welcome To Automation Testing Insider
+
+Consider the above example, the element will be visible in 5 seconds but WebDriver will still wait for another 5 seconds. It will increase test execution time.
+
+Difference between Implicit wait and Explicit wait:
+
+
+
+What happens when we use Implicit wait and Explicit wait together:
+
+Implicit wait destroys meaning of using explicit wait when using together. So it is advised not to use implicit wait and explicit wait together. Actually when we use both waits together, both waits will be applied at the same time and it get messed up.
+
+Now we will see reason behind these using below scenarios:
+
+1. Explicit Wait= Implicit Wait (Say 10 seconds)
+
+Both waits get activated at same time to locate element. Explicit wait keeps searching for an element till it is found and implicit wait allows webdriver to search till timeout. When explicit wait starts and looks for element, because of implicit wait it needs to wait for 10 seconds because element is not found. So both waits completes 10 seconds wait time.
+
+2. Implicit wait(20) > Explicit Wait(10)
+
+When explicit wait stars looking for element, it needs to wait for 20 seconds because of implicit wait time.
+
+3. Implicit wait(10) < Explicit Wait(20)
+
+When explicit wait starts looking for element, it needs to wait for 10 seconds because of implicit wait. After that implicit wait throws exception because of not able to locate element.  Exception stops explicit wait to search further and does not allow to reach its timeout.
+
+Few more points to remember:
+1. The most widely used waits are implicit and explicit waits. Fluent waits are not preferable for real-time projects.
+2. We use FluentWait commands mainly when we have web elements which sometimes visible in few seconds and some times take more time than usual. Mostly in Ajax applications.
+3. We use mostly explicit wait because it is for specific condition/element and we have more flexibility in using explicit rather than implicit.

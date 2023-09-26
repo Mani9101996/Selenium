@@ -1,0 +1,53 @@
+What is AutoIt tool?
+AutoIt V3 is a freeware tool which is used for automating anything in Windows environment. AutoIt script is written in a BASIC language. It can simulate any combination of keystrokes, mouse movement and window/control manipulation.
+
+Selenium Usage
+
+•	Handle window GUI and non HTML popups
+•	Upload files
+Download AutoIT and AutoIT editor
+https://www.autoitscript.com/site/autoit/downloads/
+
+Handle Windows Authentication using AutoIT tool.
+
+import java.io.IOException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class HandleWindwowAuthentication {
+
+ public static void main(String[] args) throws IOException, InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("http://the-internet.herokuapp.com/basic_auth");
+  Thread.sleep(2000);
+  Runtime.getRuntime().exec("C:\\Users\\Hitendra\\Desktop\\Authen.exe");
+  Thread.sleep(2000);
+        //driver.close();
+ }
+}
+
+2nd way to Handle Windows Authentication:
+import java.io.IOException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class HandleWindwowAuthentication1 {
+
+ public static void main(String[] args) throws IOException, InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+        //driver.close();
+
+ }
+
+}
+

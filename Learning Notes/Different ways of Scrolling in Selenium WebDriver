@@ -1,0 +1,92 @@
+What is Scroll and Scroll bar?
+A vertical or horizontal bar commonly located on the far right or bottom of a window that allows you to move the window viewing area up, down, left, or right
+Selenium Webdriver does not require scroll to perform actions as it manipulates DOM. But in certain web pages, elements only become visible once the user have scrolled to them. In such cases scrolling may be necessary.
+
+To scroll using Selenium, you can use JavaScriptExecutor interface that helps to execute JavaScript methods through Selenium Webdriver.
+
+JavascriptExecutor js = (JavascriptExecutor) driver; js.executeScript(Script,Arguments);
+
+•	Scroll up or down by pixel
+js.executeScript("window.scrollBy(1000,4000)")
+
+Please refer below program:
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScrollUpDown {
+
+ public static void main(String[] args) throws InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.get("https://www.automationtestinginsider.com/");
+  Thread.sleep(2000);
+  JavascriptExecutor js= (JavascriptExecutor) driver;
+  js.executeScript("window.scrollBy(1000,0)");
+ }
+}
+
+
+
+
+
+
+•	Scroll down by Visibility of Element
+js.executeScript("arguments[0].scrollIntoView();", ele);
+
+Please refer below program:
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScrollDownByVisibilityOfEle {
+
+ public static void main(String[] args) throws InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  JavascriptExecutor js= (JavascriptExecutor) driver;
+  WebElement ele=driver.findElement(By.id("simpleAlert"));
+  js.executeScript("arguments[0].scrollIntoView()",ele );
+ }
+}
+
+
+
+
+
+
+
+•	Scroll down by end of the page
+js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+
+Please refer below program:
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ScrollDownByEndOfthePage {
+
+ public static void main(String[] args) throws InterruptedException {
+  
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  JavascriptExecutor js= (JavascriptExecutor) driver;
+  js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+ }
+}
+

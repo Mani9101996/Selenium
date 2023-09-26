@@ -1,0 +1,98 @@
+The main difference between Radio button and Checkbox is that,
+using radio button we will be able to select only one option from the options available. whereas using checkbox, we can select multiple options.
+
+Using Click() method in Selenium we can perform the action on the Radio button and on Checkbox.
+
+Before selecting the Radio buttons or check boxes we will have to verify:
+
+
+•	If Radio button or Checkbox is displayed on the webpage
+•	If Radio button or Checkbox is enabled on the webpage
+•	Check the default selection of the Radio button or Checkbox
+
+Above mentioned verification can be done using predefined methods in Selenium:
+
+
+•	isDisplayed()
+•	isEnabled()
+•	isSelected()
+
+isDisplayed()
+
+WebElement maleRadioBtn = driver.findElement (By.xpath("//input[@type='radio' and @value='Male']"));
+
+maleRadioBtn.isDisplayed // this returns a Boolean value, if it returns true then said radio button is present on the webpage or it returns False if not present.
+
+isEnabled()
+
+maleRadioBtn.isEnabled() // this returns a Boolean value, if it returns true then said radio button is enabled on the webpage or it returns False if not enabled.
+
+isSelected()
+
+maleRadioBtn.isSelected() // this returns a Boolean value, if it returns true then said radio button is selected or it returns False if not selected.
+
+Keep a note that Above methods can be used while working with Check boxes.
+
+Please refer the below code:
+
+
+public class CheckBoxRadioDemo {
+
+     public WebDriver driver;
+
+     public void launch() throws InterruptedException {
+
+          System.setProperty("webdriver.chrome.driver",
+                   "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+          driver = new ChromeDriver();
+          driver.manage().window().maximize();
+          driver.get("https://www.automationtestinginsider.com/2019/08/student-registration-form.html");
+          Thread.sleep(2000);
+     }
+
+     public void radioBtnDemo() throws InterruptedException {
+
+          WebElement radioBtn = driver.findElement(By.xpath("//input[@type='radio' and @value='Male']"));
+          radioBtn.click();
+          System.out.println("Male radio btn is Selected: "+radioBtn.isSelected());
+          Thread.sleep(2000);
+     }
+    
+     public void checkBoxDemo(String hobby) throws InterruptedException {
+         
+          //WebElement chekBox=driver.findElement(By.xpath("//input[@type='checkbox' and @value='Drawing']"));
+          //chekBox.click();
+          //Thread.sleep(2000);
+         
+          List<WebElement> list= driver.findElements(By.xpath
+                   ("//input[@type='checkbox' and @name='Hobby']"));
+         
+          for(int i=0; i<list.size();i++) {
+             
+              WebElement ele=list.get(i);
+              String hobbies=ele.getAttribute("value");
+              //System.out.println(hobbies);
+              if(hobbies.contains(hobby)) {
+                   ele.click();
+                   Thread.sleep(2000);
+                   break;
+              }
+          }
+         
+     }
+    
+
+     public void closeBrowser() {
+          driver.close();
+     }
+
+     public static void main(String[] args) throws InterruptedException {
+          CheckBoxRadioDemo obj = new CheckBoxRadioDemo();
+          obj.launch();
+          obj.radioBtnDemo();
+        obj.checkBoxDemo("Others");
+        //obj.closeBrowser();
+     }
+
+}
+

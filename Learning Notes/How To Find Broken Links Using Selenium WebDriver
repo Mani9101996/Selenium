@@ -1,0 +1,167 @@
+we will cover the following points:
+What are broken links and images?
+Examples of a broken link error code
+HTTP status codes.
+Reasons for broken links 
+Why should you check Broken links? 
+Steps to check broken links and images
+Program
+What are broken links?
+Broken links are links or URLs that are not reachable.
+A broken link is a web-page that can’t be found or accessed by a user,
+
+Examples of a broken link error code
+Here are some examples of errors that a web server may present for a broken link:
+404 Page Not Found: the page/resource doesn’t exist on the server
+400 Bad Request: the host server cannot understand the URL on your page
+Bad host: Invalid host name: the server with that name doesn’t exist or is unreachable
+Bad URL: Malformed URL (e.g. a missing bracket, extra slashes, wrong protocol, etc.)
+Bad Code: Invalid HTTP response code: the server response violates HTTP spec
+Empty: the host server returns “empty” responses with no content and no response code
+Timeout: Timeout: HTTP requests constantly timed out during the link check
+Reset: the host server drops connections. It is either misconfigured or too busy. 
+Some of the HTTP status codes.
+Below are the some of the status codes:
+200 – Valid Link
+404 – Link not found
+400 – Bad request
+401 – Unauthorized
+500 – Internal Error
+
+
+Reasons for broken links 
+There are various reasons that broken links can occur, for example:
+The website owner entered the incorrect URL (misspelled, mistyped, etc.).
+The external site is no longer available, is offline, or has been permanently moved.
+Links to content (PDF, Google Doc, video, etc.) that has been moved or deleted.
+Broken elements within the page (HTML, CSS, Javascript, or CMS plugins interference).
+Firewall or geolocation restriction does not allow outside access.
+Why should you check Broken links? 
+You should always make sure that there are no broken links on the site because the user should not land into an error page.
+Manual checking of links is a tedious task, because each webpage may have a large number of links & manual process has to be repeated for all pages.
+An Automation script using Selenium that will automate the process is a great solution. 
+Steps to check broken links and images:
+Collect all the links in the web page based on <a> and <img> tags.
+Send HTTP request for the link and read HTTP response code.
+Find out whether the link is valid or broken based on HTTP response code.
+Repeat this for all the links captured.
+Program:
+Utility Class for Broken Links and Images:
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class VerifyBrokenLink {
+ 
+ int validLink=0;
+ int invalidLink=0;
+
+ public void verifyBrokenLinks(String linkURL) {
+  
+  try {
+   URL url = new URL(linkURL);
+   HttpURLConnection httpURLConnect = (HttpURLConnection) url.openConnection();
+   httpURLConnect.connect();
+
+   int respCode = httpURLConnect.getResponseCode();
+
+   if (respCode >= 400) {
+    System.out.println(linkURL + ": is a broken link" + "---" + httpURLConnect.getResponseMessage()+ "---" + httpURLConnect.getResponseCode());
+    invalidLink=invalidLink+1;
+   } else {
+    System.out.println(url + ": is a valid link" + "---" + httpURLConnect.getResponseMessage()+ "---" + httpURLConnect.getResponseCode());
+    validLink=validLink+1;
+   }
+   httpURLConnect.disconnect();
+  } catch (MalformedURLException e) {
+   e.printStackTrace();
+  } catch (IOException e) {
+   e.printStackTrace();
+  }  
+ }
+}
+
+Test Class from where verifying broken links:
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class BrokenLinkTest {
+
+ WebDriver driver;
+ List<WebElement> activeLinkImage = new ArrayList<WebElement>();
+
+ @BeforeTest
+ public void launchApp() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.google.com");
+ }
+ @Test(priority = 1)
+ public void getLinks() {
+
+  // List of all links and images
+  List<WebElement> linkImgList = driver.findElements(By.tagName("a"));
+  linkImgList.addAll(driver.findElements(By.tagName("img")));
+
+  // Total Links and Images Before
+  int total = linkImgList.size();
+  System.out.println("Total Links and Images are: " + total);
+
+  for (int i = 0; i < linkImgList.size(); i++) {
+   if (linkImgList.get(i).getAttribute("href") != null &&(!linkImgList.get(i).getAttribute("href").contains("javascript"))) {
+    activeLinkImage.add(linkImgList.get(i));
+   }
+  }
+  // Total Links and Images After
+  int total1 = activeLinkImage.size();
+  System.out.println("Total Active Links and Images: " + total1);
+ }
+ @Test(priority = 2)
+ public void VerifyBrokenLinks() throws IOException {
+  VerifyBrokenLink obj= new VerifyBrokenLink();
+  for(int j=0;j<activeLinkImage.size();j++)
+  {
+   WebElement ele= activeLinkImage.get(j);
+   String url=ele.getAttribute("href");
+   obj.verifyBrokenLinks(url);
+  }
+  System.err.println("Total Valid Links: "+obj.validLink);
+  System.err.println("Total Invalid Links: "+obj.invalidLink);
+ }
+ @AfterTest
+ public void tearDown() {
+  driver.close();
+ }
+}
+
+Output: output will be look like below
+Total Links and Images are: 32
+Total Active Links and Images: 30
+https://mail.google.com/mail/?tab=wm&ogbl: is a valid link---OK---200
+https://www.google.co.in/imghp?hl=en&tab=wi&ogbl: is a valid link---OK---200
+https://www.google.co.in/intl/en/about/products?tab=wh: is a valid link---OK---200
+https://www.google.com/search?q=coronavirus+tips&oi=ddle&ct=153021071&hl=en&sa=X&ved=0ahUKEwjm8I-KgNHoAhW0yTgGHbqHACUQPQgN: is a broken link---Forbidden---403
+.
+.
+.
+.
+Total Valid Links: 28
+Total Invalid Links: 2
+PASSED: getLinks
+PASSED: VerifyBrokenLinks
+
+===============================================
+    Default test
+    Tests run: 2, Failures: 0, Skips: 0
+===============================================
