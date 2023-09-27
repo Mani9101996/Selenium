@@ -1,0 +1,61 @@
+In this article we will cover the following points:
+What is TestNG?
+Different Features of TestNG
+TestNG vs Junit
+Install TestNG Plugin
+Write First TestNG Program
+What is TestNG?
+ TestNG is an automation testing framework.
+ NG stands for "Next Generation".
+ Java unit testing framework.
+ TestNG is an advance framework designed in a way to leverage the benefits by both the developers and testers.
+TestNG is a testing framework inspired from JUnit and NUnit but introducing some new functionalities that make it more powerful and easier to use.
+TestNG Features:
+TestNG simplifies the way the tests are coded. There is no more need for a static main method in our tests.
+Support for annotations (@).
+Using TestNG you can generate a proper report  and can see passed, failed, skipped test results.
+Test case Prioritization.
+Support for Data Driven Testing using Data providers.
+Multiple test cases can be grouped more easily by converting them into testng.xml file.
+The same test case can be executed multiple times without loops just by using keyword called 'invocation count.'.
+Cross browser testing.
+Parallel Testing is possible using TestNG.
+Advantages of TestNG over Junit:
+There are three major advantages of TestNG over Junit.
+More Annotations than JUnit and Annotations are easier to understand
+Test cases can be grouped more easily.
+Parallel testing is possible.
+The testing framework can be easily integrated with tools like Maven, Jenkins, etc.
+Install TestNG step by step
+
+There are two ways you can install TestNG in Eclipse.
+First Way on installing Eclipse is using "Install new software" option.
+Second way is using "Eclipse Market Place". - This option will be available in new versions of eclipse.
+
+Lets have a look at the first version:
+
+Step 1:
+In Eclipse, on top menu bar, Under Help Menu, Click on "Install new Software" in help window.
+
+
+Step 2:
+Enter the URL (http://dl.bintray.com/testng-team/testng-eclipse-release/) at Work With field and click on "Add" button. Add the URL and later click on next.
+
+
+
+Step 3:
+It will check for the requirement and dependencies before starting the installation. Once the above step is done, it will ask you to review the installation details. If your are ready or OK to install TestNG, click on "Next" to continue..Later Accept the Terms of the license agreement and Click on "Finish" button. If there is any problem with the requirements/dependencies, it will ask you to install them first before continuing with TestNG. Most of the cases it will successfully get installed nothing to worry about it.
+
+It will take few minutes to get installed.
+
+Verify TestNG installed or not?
+
+Step 4: In Eclipse, on top menu bar, Under Help Menu, Click on "Install new Software" in help window.
+
+
+Step 5: Click on already installed?
+
+
+
+Step 6: You can verify if the TestNG is available as per the below screen shot.
+

@@ -1,0 +1,75 @@
+What is HTML?
+
+
+•	HTML stands for Hyper Text Mark-up Language
+•	HTML describes the structure of a Web page
+•	HTML consists of a different elements
+•	HTML elements tell the browser how to display the content
+•	HTML elements are represented by tags
+•	HTML provides the basic structure of sites, which is enhanced and modified by other technologies like
+•	CSS is used to control presentation, formatting, and layout.
+•	JavaScript  is most well-known as the scripting language for Web pages and it is used to control the behaviour of different elements. is most well-known as the scripting language for Web pages.
+ 
+Sample HTML
+In Above Image:
+<The <!DOCTYPE html> declaration defines this document to be HTML5
+The <html> element is the root element of an HTML page
+The <head> element contains meta information about the document
+The <title> element specifies a title for the document
+The <body> element contains the visible page content
+The <h1> element defines a large heading
+The <p> element defines a paragraph
+
+HTML Tags:
+
+--HTML tags are element names surrounded by angle brackets:
+<tagname>content here...</tagname>
+The <!DOCTYPE> declaration represents the document type, and helps browsers to display web pages correctly.
+--HTML Headings - HTML headings are defined with the <h1> to <h6> tags.
+<h1>This is a Heading</h1>
+--HTML Paragraphs - HTML paragraphs are defined with the <p> tag.
+<p>This is a paragraph.</p>
+--HTML Links - HTML links are defined with the <a> tag:
+<a href="https://www.automationtestinginsider.com/">This is a link</a>
+
+Attributes allow you to customise a tag, and are defined within the opening tag. Attributes are used to provide additional information about HTML element.
+
+--HTML Images - HTML images are defined with the <img> tag.
+The source file (src), alternative text (alt), width, and height are provided as an attributes
+<img src=“ATI.jpg" alt=“automationtestinginsider.com" width="105" height="144">
+--HTML Buttons- HTML buttons are defined with the <button> tag.
+<button>Click me</button>
+--HTML Lists - HTML lists are defined with the <ul> (unordered/bullet list) or the <ol> (ordered/numbered list) tag, followed by <li> tags (list items):
+<ul>
+  <li>C</li>
+  <li>C++</li>
+  <li>Java</li>
+</ul>
+
+<ol>
+  <li>C</li>
+  <li>C++</li>
+  <li>Java</li>
+</ol>
+
+The <form> Element
+--The HTML <form> element defines a form that is used to collect user input:
+Form elements are different types of input elements, like text fields, checkboxes, radio buttons, submit buttons, and more.
+
+The <input> Element
+--The <input> element is the most important form element.
+--The <input> element can be displayed in several ways, depending on the type attribute.
+<input type="text">
+<input type="radio">
+<input type="submit">
+--The <select> Element - The <select> element defines a drop-down list:
+<select name="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="fiat">Fiat</option>
+  <option value="audi">Audi</option>
+</select>
+div tag
+--The <div> tag defines a division or a section in an HTML document.
+--The <div> element is often used as a container for other HTML elements to style them with CSS or to perform certain tasks with JavaScript.
+

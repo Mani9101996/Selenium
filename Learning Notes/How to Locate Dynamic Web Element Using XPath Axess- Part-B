@@ -1,0 +1,26 @@
+What is XPath Axess?
+
+•	XPath Axes are used to find dynamic elements
+•	XPath AXES is the concept which makes the XPath Expressions powerful out of all the locators. i.e. By using XPath AXES, we can traverse both forward and backward in the HTML code of the web pages.
+•	Axes methods are used to find those elements, which dynamically change on refresh or any other operations. There are few axes methods commonly used in Selenium Webdriver like child, parent, ancestor, sibling, preceding etc.
+Following are the axes techniques:
+
+•	Ancestor:
+•	Child:
+•	Descendant 
+•	Following:
+•	Following-sibling:
+•	Parent
+•	Preceding:
+•	Preceding-sibling:
+Ancestor:  ancestor selects any Parent and Grandparent of the current node.
+Example: //input[@id=‘user123']/ancestor::*
+Child: Selects all children elements of the current node.
+Example: //div[@id='user123']/child::*
+Descendant: Descendant lets you select Children and Grandchildren of the current node.
+Following: Following returns all in the document after the closing tag of the current node.
+Following-sibling: Following-sibling returns all the sibling after the closing tag of the current node.
+Parent: Parent returns the parent of the current node.
+Preceding: Preceding returns all in the document before the current node.
+Preceding-sibling: returns all the sibling before the current node.
+Self: returns the current node.

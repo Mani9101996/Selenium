@@ -1,0 +1,59 @@
+What is CSS?
+
+•	CSS stands for Cascading Style Sheets.
+•	CSS describes how HTML elements are to be displayed on screen.
+•	Why CSS is for locating web elements? --> To identify Dynamic web elements on webpage (Those elements whose attribute values are changing frequently by performing operation like page refresh so it is difficult to handle such elements so we use CSS and XPath to locate such elements).
+Below are the examples shown in the images with and without CSS.
+
+Simple Web Page without CSS:
+ 
+Simple Web Page without CSS
+Simple Web Page with CSS:
+ 
+Simple Web Page with CSS
+
+What is CSS Selector:
+CSS selectors are used to select the content you want to style. CSS selectors select HTML elements according to its id, class, type, attribute etc.
+
+XPath Vs cssSelector
+
+•	Xpath engines are different in each browser, hence make them inconsistent. Particularly in IE. IE does not have a native xpath engine.
+•	CSS is faster. It also improves the performance. It is very compatible across browsers.
+•	Writing CSS is not simpler than XPath.
+Different ways to write CSS selector in Selenium Web driver: Please look into below table:
+ 
+Different Ways to locate element using cssSelector
+
+1. Locate by id (using symbol # hash)
+    Syntax: tag#id or #id
+    Example: input#user_login or #user_login
+
+2. Locate by className (using symbol . dot)
+      Syntax: tag.className
+      Example: input.input
+
+3. Locate by Name or Attribute or using multiple attributes:
+      Syntax:
+
+•	      tagName[attributeName='value'] 
+•	      [attributeName='value']
+•	      tagName[attribute1='value'][attribute2='value']
+•	      tagName[attribute1='value'],[attribute2='value']
+Example: few examples given below
+input[name=‘username']
+input[name='log'],[id='input'],[type='text']
+
+4. Match with Prefix or start with (using symbol ^ Exponential operator)
+
+Syntax: tagname[Attribute^= ‘Prefix of Attribute value'] 
+Example: input[name^='txtUser']
+
+5. Match with suffix or ends with (using symbol $ dollar sign)
+
+Syntax: tagname[Attribute$= ‘suffix of Attribute value']
+Example:   input[name$='name']
+
+6. Match with substring or contains (using symbol * asterisk)
+
+Syntax: tagname[Attribute*='subString  of Attribue value']
+Example: input[name*='User']

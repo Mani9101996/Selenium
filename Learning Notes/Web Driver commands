@@ -1,0 +1,138 @@
+We can divide WebDriver Commands into three categories:
+
+•	Browser Specific Commands
+•	Browser Navigation Commands and,
+•	Element Specific Commands
+In this post we will discuss about 25 WebDriver commands which are used frequently in Selenium Automation:
+
+Browser Specific Commands:
+
+1. Maximize window:
+To maximize a browser window, we need to call the maximize() method of the Window interface of the driver class. Add the second line right below where you define an instance of FirefoxDriver.
+Example: 
+driver = new FirefoxDriver(); 
+driver.manage().window().maximize();
+
+2. Delete cookies
+Delete all the cookies for the current domain using deleteAllCookies() method.
+Example:
+driver.manage().deleteAllCookies();
+
+Deleting the specific cookie with cookie name "--abcd"
+driver.manage().deleteCookieNamed("__abcd");
+
+3. Get command:
+The command launches a new browser and opens the specified URL in the browser instance
+The command takes a single string type parameter that is usually a URL of application under test.
+Example: driver.get("https://google.com");
+
+4. GetTitle:
+The command is used to retrieve the title of the webpage the user is currently working on. A null string is returned if the webpage has no title.
+The command doesn’t require any parameter and returns a trimmed string value. 
+Example: String title = driver.getTitle();
+
+5. GetCurrentUrl:
+The command is used to retrieve the URL of the webpage the user is currently accessing 
+The command doesn’t require any parameter and returns a string value.
+Example: driver.getCurrentUrl();
+
+6. GetPageCource:
+The command is used to retrieve the page source of the webpage the user is currently accessing.
+The command doesn’t require any parameter and returns a string value. The command can be used with various string operations like contains() to ascertain the presence of the specified string value.
+Example:
+boolean result = driver.getPageSource().contains("String to find");
+
+7. Close:
+WebDriver’s close() method closes the web browser window that the user is currently working on or we can also say the window that is being currently accessed by the WebDriver. The command neither requires any parameter nor does it return any value.
+Example:
+driver.close();
+
+8. Quit
+Unlike close() method, quit() method closes down all the windows that the program has opened. Same as close() method, the command neither requires any parameter nor does it return any value.
+Example:
+driver.quit();
+
+Please refer below youtube video on Browser Specific commands:
+
+
+
+Browser Navigation Commands:
+
+WebDriver provides some basic Browser Navigation Commands that allows the browser to move backwards or forwards in the browser's history.
+
+1. Navigate To:
+Method - String to(String arg0)
+In WebDriver, this method loads a new web page in the existing browser window. It accepts String as parameter and returns void. The respective command to load/navigate a new web page can be written as:
+Example:
+driver.navigate().to("www.automationtestinginsider.com");  
+
+2. Backward:
+Method - void back()
+This method enables the web browser to click on the back button in the existing browser window. It neither accepts anything nor returns anything. The respective command that takes you back by one page on the browser's history can be written as:
+Example:
+driver.navigate().back(); 
+
+3. Forward:
+Method - void forward()
+This method enables the web browser to click on the forward button in the existing browser window. It neither accepts anything nor returns anything. The respective command that takes you forward by one page on the browser's history can be written as:
+Example:
+driver.navigate().forward();  
+
+4. Refresh:
+Method - void refresh()
+In WebDriver, this method refresh/reloads the current web page in the existing browser window. It neither accepts anything nor returns anything. The respective command that takes you back by one page on the browser's history can be written as:
+Example:
+driver.navigate().refresh();
+
+Please refer below youtube video on Browser Navigation commands:
+
+
+
+Element Specific Commands:
+
+1. Clear:
+clear( ) predefined method of  Selenium 'WebDriver' Class is used to clear the text entered or displayed in the text fields
+Example: driver.findElement(By.id("userName")).sendKeys("Admin").clear();
+
+2. Click:
+The click command emulates a click operation for a link, button, checkbox or radio button. In Selenium Webdriver, execute click after finding an element.
+Example: driver.findElement(By.id("button")).click();
+
+3. getText:
+The command is used to retrieve the inner text of the specified web element. The command doesn’t require any parameter and returns a string value:
+Example:  String elementText = driver.findElement(By.id("Text")).getText();
+
+4. IsSelected:
+isSelected() is the method used to verify if the web element is selected or not.
+Example: boolean ele= driver.findElement(By.id("button")).isSelected();
+         
+5. IsEnabled:
+isEnabled() is the method used to verify if the web element is enabled or disabled within the webpage. isEnabled() is primarily used with buttons. 
+Example: boolean ele= driver.findElement(By.id("button")).isEnabled();
+
+6. IsDisplayed:
+isDisplayed() is the method used to verify a presence of a web element within the webpage. The method returns a “true” value if the specified web element is present on the web page and a “false” value if the web element is not present on the web page.
+Example: boolean ele= driver.findElement(By.id("button")).IsDisplayed();
+
+7. getAttribute:
+The command is used to retrieve the value of the specified attribute. The command requires a single string parameter that refers to an attribute whose value we aspire to know and returns a string value. as a result.
+Example: driver.findElement(By.id("findID")).getAttribute("value");
+
+8. sendkeys:
+This is a method for sending one or more keystrokes to the active window
+Example: driver.findElement(By.id("userName")).sendKeys("Admin")
+
+9. Submit:
+submit() is used to click Button in Web page. Selenium Webdriver has one special method to submit any form and that method name Is submit(). You can use .click() method to click on any button.There is no restriction for click buttons. We can use .submit() method for only submit form after click on button. That means element's type = "submit" and button should be inside <form> tag, then only submit() will work.
+
+10. getSize: 
+It will returns the "Dimension" object. If you want to get the width and Height of the specific element on the webpage then use "getsize()" method.
+
+11. getCssValue: - getCssValue method in selenium fetches the value of a CSS property of an web element.
+
+12. getLocation: 
+In Selenium WebDriver APIs, there is a method getLocation() which returns point, containing location of top left hand corner of the element. Let's say, it returns (x, y).
+
+13. getTagname: 
+This method gets the tag name of this element. This accepts nothing as a parameter and returns a String value. Command – element.getTagName();
+

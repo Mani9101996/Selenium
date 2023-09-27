@@ -1,0 +1,59 @@
+What is an Iframe or frame?
+ An iframe is also known as the inline frame. It is a tag used in HTML5 to embed an HTML document within a parent HTML document. An iframe tag is defined using <iframe></iframe> tags.
+IFrame is a web page which is embedded in another web page or an HTML document embedded inside another HTML document.
+
+The frame enables a developer to split the screen horizontally or vertically by using the frameset tag. Frame and frameset tags are deprecated as they are no longer supported by HTML 5.
+
+How to Identify the Iframe?
+Right click on the element, If you find the option like View Frame Source' then it is an iframe.
+From DOM tree. Search with tag ‘iframe’
+Right click on the page and click 'View Page Source' and Search with the 'iframe‘
+Through selenium locator tagName in the script  -- By.tagName("iframe")
+To work with different frames, we need to use the SwitchTo().frame method. This method enables the browser to switch between multiple frames. It can be implemented in the following ways:
+
+switchTo.frame(int  frame number): Defining the frame index number, the Driver will switch to that specific frame
+switchTo.frame(string  frameNameOrId): Defining the frame element or Id, the Driver will switch to that specific frame
+switchTo.frame(WebElement  frameElement): Defining the frame web element, the Driver will switch to that specific frame.
+-----------------------------------------------------------------------------------------------------------------------------------
+Selenium Script on iframe:
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class IframeDemo {
+
+ public static void main(String[] args) throws InterruptedException {
+
+  WebDriver driver;
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+  Thread.sleep(2000);
+  //First finding the elements using any of locator strategy
+  List<WebElement> iframList = driver.findElements(By.tagName("iframe"));
+  int totalFrames = iframList.size();
+  System.out.println("No of Frames:" + totalFrames);
+  WebElement ele=driver.findElement(By.name("iframe_b"));
+  System.out.println("Frame Names are:");
+  for (WebElement iframe : iframList) {
+   System.out.println(iframe.getAttribute("name"));
+   if (iframe.getAttribute("name").equals("iframe_b")) {
+    //switch to frame by element
+    driver.switchTo().frame(ele);
+    //Perform all the required tasks 
+    driver.findElement(By.id("searchInput")).sendKeys("iframe Testing");
+    Thread.sleep(2000);
+    //Switching back to the main window
+                driver.switchTo().defaultContent();
+   }
+  }
+  boolean btnDisplayed=driver.findElement(By.id("simpleAlert")).isDisplayed();
+  System.out.println(btnDisplayed);
+  driver.close();
+ }
+}

@@ -1,0 +1,71 @@
+•	What is SelectorsHub?
+•	How to install & use SelectorsHub? 
+•	Why to use SelectorsHub
+•	ShadowDOM Support
+•	Proper error message
+•	Iframe support
+•	SVG element support
+What is SelectorsHub?
+SelectorsHub helps to write and verify the XPath and cssSelector. SelectorsHub is the complete new way to write and verify the XPath and cssSelectors.
+SelectorsHub auto suggests all attributes, text and everything along with their occurrences to complete Selectors quickly. Now you need not to copy and paste attribute values from DOM anymore to build XPath and cssSelector. It also supports shadowDOM, iframe and SVG elements. It gives the proper error message like what is wrong in your xpath and cssSelector.
+SelectorsHub is invented and created by Mr. Sanjay Kumar
+How to install & use SelectorsHub?
+Find the download link here. Try it now it's absolutely FREE.
+https://www.selectorshub.com/
+1.	Click on the download link for whichever browser you want.
+ 
+
+
+2) Click on Add to Chrome.
+ 
+
+
+
+3) After adding the extension, it will show in the browser toolbar like this. You can pin to the toolbar by clicking on the pin icon.
+ 
+
+
+4) After adding the extension, restart the browser.
+5) Now open DevTools by right clicking on any element and clicking on inspect.
+ 
+
+6) On the right side of the Elements tab, SelectorsHub will be the last tab as shown in below image. If not visible, expand the sidebar or click on the two arrow icons as shown in below gif.
+ 
+
+
+7) Now here you start typing your xpath or cssSelector. You will get auto suggest for inspected element.
+ 
+Why to use SelectorsHub while there are so many other good XPath tools & selectors tools?
+Biggest reason is, SelectorsHub helps to improve XPath and cssSelector writing skills.
+Not one reason, there are many reasons which makes SelectorsHub the unique and best xpath tool.
+1.	SelectorsHub is the only tool which made it possible to write own selectors in less than 5sec with its auto suggest feature without compromising learning skills.
+2.	SelectorsHub is the only tool which supports #shadowDOM, in fact even Chrome DevTools doesn’t support shadowDOM.
+3.	SelectorsHub is the only tool which gives the proper error message for the missing elements in your selectors.
+4.	It helps you to improve your xpath and cssSelectors writing skills.
+5.	It has iframe support.
+6.	It supports svg elements.
+7.	It supports dark theme.
+ShadowDOM Support
+It was never possible to verify and write the cssSelectors for shadowDOM elements but this amazing innovation made it possible.
+ 
+
+
+ 
+
+Proper error message for missing elements in selectors
+Earlier there was nothing which can tell us what’s wrong in our selector. We were never able to understand what’s wrong in our selector until we are not expert in it. Devtools suggests 0 matching node for wrong selector pattern. But now we have the Selector’s guide which helps us with the correct error message and what is wrong or missing in our selector.
+ 
+
+
+Iframe support
+It supports iframes as well. It will let you know if the inspected element is inside an iframe or not. Now we can easily write and verify selectors for elements inside an iframe without wasting any time.
+ 
+
+SVG element support
+Many of us are not aware that svg elements don't support the standard xpath format. SVG elements support different xpath patterns. SelectorsHub has made it easy and let you know the correct format and helps you to learn how to write selectors for svg elements.
+ 
+
+
+For more details and to make the best use of SelectorsHub please follow the video tutorials available here.
+https://www.selectorshub.com/videotutorials/
+
