@@ -1,5 +1,7 @@
 package brokenLinkTest;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +61,8 @@ public class BrokenLinkTest {
 	 		  System.err.println("Total Valid Links: "+obj.validLink);
 	 		  System.err.println("Total Invalid Links: "+obj.invalidLink);
 	 		 }
-	 		 @AfterTest
+	 		 @AfterMethod
+			@AfterTest
 	 		 public void tearDown() {
 	 		  driver.quit();
 	 		 }

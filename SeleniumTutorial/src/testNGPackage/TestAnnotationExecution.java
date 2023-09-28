@@ -1,6 +1,9 @@
 package testNGPackage;
 
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -12,7 +15,7 @@ import org.testng.annotations.Test;
 
 public class TestAnnotationExecution {
 
-	@BeforeSuite
+	@BeforeSuite(groups = {"Sanity"})
 	public void beforesuite() {
 		System.out.println("before suite is executed");
 	}
@@ -45,11 +48,11 @@ public class TestAnnotationExecution {
 		System.out.println("after method is executed");
 	}
 	
-	@Test
+	@Test(groups = {"Regression"})
 	public void testmethod1() {
 		System.out.println("test method1 is executed");
 	}
-	@Test
+	@Test(groups = {"Sanity"})
 	public void testmethod2() {
 		System.out.println("test method2 is executed");
 	}

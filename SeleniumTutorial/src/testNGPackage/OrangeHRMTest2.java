@@ -1,5 +1,9 @@
 package testNGPackage;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +30,7 @@ public class OrangeHRMTest2 {
 	public void testcase1(){
 		driver.get("https://auth.geeksforgeeks.org/");
 		boolean image = driver.findElement(By.xpath("//a[normalize-space()='']//img")).isDisplayed();
-		Assert.assertTrue(image);	
+		AssertJUnit.assertTrue(image);	
 	}
 	
 	@Test(priority = 2,description = "entering text fields")		
@@ -35,7 +39,7 @@ public class OrangeHRMTest2 {
 		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("admin123");
 		
 		boolean image1 = driver.findElement(By.xpath("//a[@id='glogin']")).isDisplayed();
-		Assert.assertTrue(image1);
+		AssertJUnit.assertTrue(image1);
 	}
 	
 	//@Ignore
@@ -43,14 +47,14 @@ public class OrangeHRMTest2 {
 	public void testcase4() throws InterruptedException {
 		String ActualTitle = driver.getTitle();
 		String ExpectedTitle = "Login GeeksforGeeks";
-		Assert.assertEquals(ActualTitle, ExpectedTitle);
+		AssertJUnit.assertEquals(ActualTitle, ExpectedTitle);
 		}
 	
 	@Test(priority = 4,description = "verifying URl",invocationCount = 5)		
 	public void testcase3() throws InterruptedException {
 		String actualUrl = driver.getCurrentUrl();
 		String expectedURL = "https://auth.geeksforgeeks.org/";
-		Assert.assertEquals(actualUrl, expectedURL);
+		AssertJUnit.assertEquals(actualUrl, expectedURL);
 		
 		}
 	
@@ -60,9 +64,10 @@ public class OrangeHRMTest2 {
 		Thread.sleep(3000);
 		String curURL = driver.getCurrentUrl();
 		String ExpURl = "https://auth.geeksforgeeks.org/";
-		Assert.assertEquals(curURL, ExpURl);
+		AssertJUnit.assertEquals(curURL, ExpURl);
 
 		}
+	@AfterMethod
 	@AfterClass
 	public void tearDown()
 	{

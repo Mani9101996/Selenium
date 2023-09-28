@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite-all">
+  <test thread-count="5" name="Test-all">
+    <classes>
+      <class name="com.test.HandlleWindoeAuthentication1"/>
+      <class name="com.test.Launch1"/>
+      <class name="com.test.ToolTipDemo2"/>
+      <class name="com.test.ToolTipDemo1"/>
+      <class name="testNGPackage.OrangeHRMTest2"/>
+      <class name="brokenLinkTest.BrokenLinkTest"/>
+      <class name="testNGPackage.TestAnnotationExecution"/>
+      <class name="com.test.SampleTest"/>
+      <class name="com.test.ScrollDownByEndofPage"/>
+      <class name="testNGPackage.OrangeHRMTest"/>
+    </classes>
+  </test> <!-- Test-all -->
+</suite> <!-- Suite-all -->
