@@ -1,0 +1,104 @@
+In this post we will discuss about following points:
+What is testng.xml file
+Importance of testng.xml
+How to generate?
+Different ways to setup testng.xml
+How to create testng.xml file manually 
+How to run multiple testng.xml in one go
+What is testng.xml?
+testng. xml file is a configuration file in TestNG. 
+It is used to define test suites and tests. It provides different options to include packages, classes and independent test methods in our test suite. 
+It also allows us to configure multiple tests in a single test suite and run them in multi threaded environment.
+Importance of testng.xml
+
+In TestNG, you can define multiple test cases in a single class whereas, in Java, you can define only one test in a single class in the main() method. In Java, if you want to create one more test, then you need to create another java file and define the test in the main() method.
+Instead of creating test cases in different classes, we recommend you to use TestNG framework that allows you to create multiple test cases in a single class.
+You can create multiple test cases with the help of @Test annotation.
+You can execute all the test cases from a single file known as xml file. Xml file is the heart of TestNG framework.
+
+How to generate testng.xml?
+Right click on the project. Move your cursor down, and you will see TestNG and then click on the Convert to TestNG.
+
+Create testng.xml
+Different ways to setup testng.xml:
+Below xml describes the different format of testng.xml
+Example1:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <classes>
+      <class name="com.packageName.Class1"/>
+      <class name=" com.packageName.Class2"/>
+      <class name=" com.packageName.Class3"/>
+</classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+You can specify package names instead of class names:
+Example2:
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test name="Test">
+    <packages>
+    <package name="com.pack1"></package>
+    <package name="com.pack2"></package>
+    <package name="com.pack3"></package>
+    </packages>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+You can also specify groups and methods to be included and excluded:
+Example3:
+<test name="Regression1">
+  <groups>
+    <run>
+      <exclude name="brokenTests"  />
+      <include name="checkinTests"  />
+    </run>
+  </groups>
+  <classes>
+    <class name="test.IndividualMethodsTest">
+      <methods>
+        <include name="testMethod" />
+      </methods>
+    </class>
+  </classes>
+</test>
+
+You can also specify methods to be included and excluded:
+Example4:
+<test name="Regression1" preserve-order="false">
+  <classes>
+    <class name="test.Test1">
+      <methods>
+        <include name="m1" />
+        <exclude name="m2" />
+      </methods>
+    </class>
+    <class name="test.Test2" />
+  </classes>
+</test>
+
+How to create testng.xml file manually: 
+Right click on Project--New--Other--
+
+
+In Select a wizard window select General--file and click on next
+
+
+Create new file window -- provide file name with .xml extension and click on finish. XML file will be generated
+
+
+How to run multiple testng.xml in one go
+Run multiple testng suites in one file:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <suite-files>
+  <suite-file path="testng1.xml"></suite-file>
+  <suite-file path="testng2.xml"></suite-file>
+  </suite-files>
+</suite> <!-- Suite -->
