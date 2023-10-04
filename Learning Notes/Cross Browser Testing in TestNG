@@ -1,0 +1,106 @@
+What is Cross Browser Testing?
+Cross Browser Testing is a type of functional test to check that your web application works as expected in different browsers..
+
+Why do we need?
+A web application can be opened in any browser by the end user. For example, some people prefer to open in Firefox, some in chrome, ie etc. We need to ensure that the web application will work as expected in all popular browsers so that more people can access it and use it.
+
+This motive can be fulfilled with Cross Browser Testing of the product.
+
+Some Cross Browser Issues
+Font size mismatch in different browsers.
+JavaScript implementation can be different.
+CSS,HTML validation difference can be there.
+Some browser still not supporting HTML5.
+Page alignment and div size.
+Image orientation.
+Browser incompatibility with OS.
+How to Achieve Cross Browser in Selenium?
+To execute test cases with different browsers in the same machine at the same time we can integrate TestNG framework with Selenium WebDriver.
+
+Example: We have created a class CrossBrowserDemo and we have a test method launchApp in it. Using @Parameters annotation we are passing browser name(as string) to test method. And based on the browser parameter our test method launchApp will be executed on particular browser.
+
+Our xml looks like below: Inside <suite> tag we have <parameter name="browser" value="Firefox"></parameter>
+
+Running test on single browser
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">
+ <test name="FireFoxTest">
+ <parameter name="browser" value="Firefox"></parameter>
+  <classes>
+   <class name="com.CrossBrowserTest.CrossBrowserDemo"></class>
+  </classes>
+ </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+Running test on multiple browser
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">
+    <test name="FireFoxTest">
+        <parameter name="browser" value="Firefox"></parameter>
+          <classes>
+   <class name="com.CrossBrowserTest.CrossBrowserDemo"></class>
+         </classes>
+</test> <!-- Test -->
+ <test name="ChromeTest">
+ <parameter name="browser" value="Chrome"></parameter>
+  <classes>
+   <class name="com.CrossBrowserTest.CrossBrowserDemo"></class>
+  </classes>
+ </test> <!-- Test -->
+ <test name="IETest">
+ <parameter name="browser" value="IE"></parameter>
+  <classes>
+   <class name="com.CrossBrowserTest.CrossBrowserDemo"></class>
+  </classes>
+ </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+ Test Class
+public class CrossBrowserDemo {
+
+ WebDriver driver;
+
+ @Parameters("browser")
+
+ @Test
+
+ public void launchApp(String browser) throws InterruptedException {
+  if (browser.equalsIgnoreCase("Chrome")) {
+
+   System.setProperty("webdriver.chrome.driver",
+
+     "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+
+   driver = new ChromeDriver();
+
+  } else if (browser.equalsIgnoreCase("Firefox")) {
+
+   System.setProperty("webdriver.gecko.driver",
+
+     "C:\\Users\\Hitendra\\Downloads\\geckodriver-v0.26.0-win64\\geckodriver.exe");
+
+   driver = new FirefoxDriver();
+
+  } else if (browser.equalsIgnoreCase("IE")) {
+
+   System.setProperty("webdriver.ie.driver",
+
+     "C:\\Users\\Hitendra\\Downloads\\IEDriverServer_x64_3.14.0\\IEDriverServer.exe");
+
+   driver = new InternetExplorerDriver();
+
+  }
+
+  driver.manage().window().maximize();
+
+  driver.get("https://www.automationtestinginsider.com/");
+
+  Thread.sleep(2000);
+
+  driver.close();
+
+ }
+
+}
