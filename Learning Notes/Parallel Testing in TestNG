@@ -1,0 +1,114 @@
+What is a Thread?
+Java provides built-in support for multi threaded programming. A multi-threaded program contains two or more parts that can run concurrently. Each part of such a program is called a thread, and each thread defines a separate path of execution.
+
+Parallel Testing
+Parallelism or multi-threading in software terms is defined as the ability of the software, operating system, or program to execute multiple parts or sub-components of another program simultaneously.
+
+Benefits of having parallel testing
+Reduces execution time – As tests are executed in parallel, multiple tests get executed simultaneously, hence reducing the overall time taken to execute the tests.
+Allows multi-threaded tests – Using this feature, we can write tests to verify certain multi-threaded code in the applications.
+There are situations where you want to run multiple tests at the same time.
+Situation 1 : If you have 100 test cases and Running these 100 tests sequentially will take you magnitudes of times longer because you can only execute one test at a time.
+Situation 2: Cross browser testing - If there are more number of scripts to be executed and executing them on each and every browsers sequentially is time consuming. 
+ The above situations can be avoided using a concept in Selenium called Parallel Execution.
+ We can reduce the 'execution time' as tests are executed simultaneously in different threads.
+
+In testNG we can achieve parallel execution by two ways.
+
+1. With testng.xml file using parallel attribute of suite tag.
+2. We can configure an independent test method to run in multiple threads.
+
+1st Method:
+1. With testng.xml file using parallel attribute of suite tag.
+Syntax: parellel =“methods”
+The parallel attribute of suite tag can accept four values: methods ,classes, tests, instances
+Sample XML <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel=“methods">
+  <test name="Test">
+    <classes>
+      <class name="com.TestPackage.ClassB"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+Example: I am giving an example here of parallel testing by methods, rest you can watch below youtube video. In below example 4 methods from two classes will be executed in two threads (thread-count="2").
+public class ClassA {
+
+ @Test
+
+ public void testcase1() {
+
+  System.out.println("This is testcase1: "+Thread.currentThread().getId());
+
+ }
+ @Test
+
+ public void testcase2() {
+
+  System.out.println("This is testcase2: "+Thread.currentThread().getId());
+ }
+}
+
+public class ClassB {
+
+ @Test
+ public void testCase3() {
+
+  System.out.println("This is testcase3: "+Thread.currentThread().getId());
+
+ }
+ @Test
+
+ public void testCase4() {
+
+  System.out.println("This is testcase4: "+Thread.currentThread().getId());
+ }
+}
+
+TestNG.xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite" parallel="methods" thread-count="2">
+
+  <test name="Test">
+
+    <classes>
+
+      <class name="com.parallelDemo.ClassA"/>
+
+      <class name="com.parallelDemo.ClassB"/>
+
+    </classes>
+
+  </test> <!-- Test -->
+
+</suite> <!-- Suite -->
+
+Output:
+This is testcase2: 14
+This is testcase1: 13
+This is testcase3: 14
+This is testcase4: 13
+
+2nd Method: 2. We can configure an independent test method to run in multiple threads.
+
+We can configure test method like below and in classC test method testMethod1 will be executed in
+two threads (threadPoolSize = 2) and will be executed 3 times(invocationCount = 3)  
+public class ClassC {
+
+ @Test(threadPoolSize = 2, invocationCount = 3, timeOut = 1000)
+
+ public void testMethod1() {
+
+  System.out.println("This is testcase1: "+Thread.currentThread().getId());
+
+ }
+}
+
+Output:
+This is testcase1: 11
+This is testcase1: 12
+This is testcase1: 11
