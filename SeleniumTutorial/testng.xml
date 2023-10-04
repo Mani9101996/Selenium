@@ -5,8 +5,9 @@
     <packages>
       <package name="testNGPackage"/>
       <package name="com.test"/>
+      <package name="parameterization"/>
       <package name="brokenLinkTest"/>
-      <package name="waitsDemo"/>
+      <package name="parameterization"/>
     </packages>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
