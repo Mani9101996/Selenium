@@ -1,0 +1,234 @@
+At times, test cases may fail while running automated test scripts. The reason may be anything (say, Network issue, System issue or browser issue) but as an automation tester, you need to analyze the result and need to execute the test scripts again. Here is a solution to run failed test cases using TestNG in Selenium.
+
+Why Test fails:
+The reason for the failures can be anything
+Application Failure – not getting expected output
+Network issue – wifi, LAN issue etc.
+Server is not responding
+Scripting issue – Locator change due to new functionality
+Application is down
+Browser/browser driver issue 
+How to execute failed test cases?
+We can execute failed test cases using two methods
+By running “testng-failed.xml”
+By Implementing TestNG IRetryAnalyzer interface
+Lets have a look the first method:
+
+1. By running “testng-failed.xml"
+
+We have created two classes ClassA and ClassB. Each class has two test methods of which
+we are deliberately failing one of the tests. 
+public class ClassA {
+
+ @Test
+
+ public void testCase1() {
+
+  System.out.println("this is testcase1");
+
+  Assert.assertTrue(false);
+
+ }
+ @Test
+
+ public void testCase2() {
+  System.out.println("this is testcase2");
+
+  Assert.assertTrue(true);
+ }
+
+}
+public class ClassB {
+
+ @Test
+
+ public void testCase3() {
+
+  System.out.println("this is testcase3");
+
+  Assert.assertTrue(true);
+
+ }
+ @Test
+
+ public void testCase4() {
+
+  System.out.println("this is testcase4");
+
+  Assert.assertTrue(false);
+ }
+}
+
+testng.xml
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Smoke Suite">
+
+  <test name="Test">
+
+    <classes>
+
+      <class name="Com.runFailedTestCases1.ClassA"/>
+
+      <class name="Com.runFailedTestCases1.ClassB"/>
+
+    </classes>
+
+  </test> <!-- Test -->
+
+</suite> <!-- Suite -->
+
+Output
+this is testcase1
+this is testcase2
+this is testcase3
+this is testcase4
+===============================================
+Suite
+Total tests run: 4, Failures: 2, Skips: 0
+
+===============================================
+
+If you want to execute only failed test cases through the Eclipse, then first refresh the project. Now navigate to test-output folder and then navigate to Suite folder (in our case suite name is Smoke Suite) Expand that, you will be able to see testng-failed.xml
+
+
+
+Open the xml and you will see failed test cases in xml file.
+Right-click on this file and click on run as and select the option called "testNG suite".
+
+testng-failed.xml
+Suppose if you have three test cases if all the test cases are executed successfully means you are not able to see this folder under the test-output folder. This folder will appear only when one of the test case is failed. Then run this file, it will going to run only failed test cases.
+
+You can create Runner file to execute your failed test cases through script.Please refer below
+program.
+public class FailTestRunner {
+
+ @AfterTest
+
+ public void runFailTestCases() {
+
+  TestNG obj= new TestNG();
+
+  List<String> list= new ArrayList<String>();
+
+  list.add("D:\\Workspace_Eclipse\\TestNGDemo8\\test-output\\Suite\\testng-failed.xml");
+
+  obj.setTestSuites(list);
+
+  obj.run();
+ }
+}
+
+2. By Implementing TestNG IRetryAnalyzer interface
+
+Create a class to implement IRetryAnalyzer. Here I am creating a class (say, RetryAnalyzerTest) and implementing IRetryAnalyzer.
+import org.testng.IRetryAnalyzer;
+import org.testng.ITestResult;
+
+public class RetryAnalyzerTest implements IRetryAnalyzer {
+
+ int count=0;
+
+ int maxCount=2;
+
+ public boolean retry(ITestResult result) {
+
+  if(count<maxCount) {
+
+   System.out.println("Retrying " +result.getName() 
+
+   +" again and count is " +(count+1));
+
+   count++;
+
+   return true;
+  }
+  return false;
+ }
+
+}
+
+
+Now create another class ‘RetryListnerClass’ by Implementing ‘IAnnotationTransaformer’ interface. transform method is called for every test during test run. A simple implementation of this ‘IAnnotationTransformer’ interface can help us set the ‘setRetryAnalyzer’ for ‘ITestAnnotation’. Add the above class name (RetryAnalyzerTest .class) in the below program. This interface does its work in run time by adding annotation to the test methods.
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import org.testng.IAnnotationTransformer;
+import org.testng.annotations.ITestAnnotation;
+
+public class RetryListnerClass implements IAnnotationTransformer {
+
+ public void transform(ITestAnnotation annotation, Class tesClass, 
+
+   Constructor testConstructor, Method testMethod) {
+
+  annotation.setRetryAnalyzer(RetryAnalyzerTest.class);
+ }
+}
+
+Let us see the example by executing simple tests below
+public class ClassA {
+
+ @Test()
+
+ public void testCase1() {
+  System.out.println("this is testcase1");
+  Assert.assertTrue(true);
+
+ }
+ @Test
+ public void testCase2() {
+  System.out.println("this is testcase2");
+  Assert.assertTrue(false);
+
+ }
+}
+
+We have two test cases in above program and one of the test case (testCase2) is getting failed.
+First lets include below mentioned Listener to testng.xml file. Below mentioned syntax is to add Listener for RetryListnereClass.
+<listeners>
+<listener class-name="method2.RetryListnerClass"></listener>
+</listeners>
+
+Final testng.xml file should looks like below:
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+
+<listeners>
+
+<listener class-name="method2.RetryListnerClass"></listener>
+
+</listeners>
+
+  <test name="Test">
+
+    <classes>
+
+      <class name="method2.ClassA"/>
+
+    </classes>
+
+  </test> <!-- Test -->
+
+</suite> <!-- Suite -->
+
+Execute the testng.xml. Here is the output which I got. You could see in the below mentioned result that the Test 2 is executed three times as we have mentioned ‘maxCount = 2’. Even though we have just 2 tests, we could find total test runs are 4 in the result.
+
+Output:
+this is testcase1
+this is testcase2
+Retrying testCase2 again and count is 1
+this is testcase2
+Retrying testCase2 again and count is 2
+this is testcase2
+===============================================
+Suite
+
+Total tests run: 4, Failures: 1, Skips: 2
+
+===============================================
