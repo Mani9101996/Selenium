@@ -1,0 +1,39 @@
+
+What is listener?
+Listeners are listen to the event defined in the selenium script and behave accordingly listener is defined as interface that modifies the default testNG’s behaviour
+
+Purpose of listener:-
+listeners are used in selenium to generate logs or customise the testing reports.
+
+There are 2 types of listeners 
+1)	webdriver listeners- events triggered by web driver 
+2)	TestNg listeners-events triggered by testNG
+
+TestNg listeners
+IAnnotationTransformer
+IAnnotationTransformer2
+IConfigurable 
+IConfigurableListener
+IConfigurableListener2
+IHookable
+IInvokedMethodListener
+IInvokedMethodListener2
+ IMethodInterception
+ISuiteListener
+ITestListener
+Ireporter
+
+
+how to implement?
+1)	at class level
+2)	at suite level
+
+
+
+
+
+
+
+
+
+
