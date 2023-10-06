@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results retried="2" ignored="2" total="6" passed="1" failed="1" skipped="0">
+<testng-results ignored="0" total="6" passed="4" failed="1" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-10-06T12:26:08 IST" name="Suite" finished-at="2023-10-06T12:26:08 IST" duration-ms="138">
+  <suite started-at="2023-10-06T13:46:48 IST" name="SmokeSuite" finished-at="2023-10-06T13:46:49 IST" duration-ms="141">
     <groups>
     </groups>
-    <test started-at="2023-10-06T12:26:08 IST" name="Test" finished-at="2023-10-06T12:26:08 IST" duration-ms="138">
-      <class name="runFailesTCMethod2.ClassA">
-        <test-method signature="Testcase1()[pri:0, instance:runFailesTCMethod2.ClassA@791f145a]" started-at="2023-10-06T12:26:08 IST" name="Testcase1" finished-at="2023-10-06T12:26:08 IST" duration-ms="11" status="PASS">
+    <test started-at="2023-10-06T13:46:48 IST" name="SmokeTest" finished-at="2023-10-06T13:46:49 IST" duration-ms="141">
+      <class name="ListenerTestNG.TestClass">
+        <test-method signature="TestCase1()[pri:0, instance:ListenerTestNG.TestClass@13e344d]" started-at="2023-10-06T13:46:48 IST" name="TestCase1" finished-at="2023-10-06T13:46:48 IST" duration-ms="21" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase1 -->
-        <test-method retried="true" signature="Testcase2()[pri:0, instance:runFailesTCMethod2.ClassA@791f145a]" started-at="2023-10-06T12:26:08 IST" name="Testcase2" finished-at="2023-10-06T12:26:08 IST" duration-ms="13" status="SKIP">
+        </test-method> <!-- TestCase1 -->
+        <test-method signature="TestCase2()[pri:0, instance:ListenerTestNG.TestClass@13e344d]" started-at="2023-10-06T13:46:48 IST" name="TestCase2" finished-at="2023-10-06T13:46:48 IST" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TestCase2 -->
+        <test-method signature="TestCase3()[pri:0, instance:ListenerTestNG.TestClass@13e344d]" started-at="2023-10-06T13:46:48 IST" name="TestCase3" finished-at="2023-10-06T13:46:48 IST" duration-ms="20" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [true] but found [false]]]>
@@ -22,7 +26,7 @@ at org.testng.Assert.fail(Assert.java:111)
 at org.testng.Assert.failNotEquals(Assert.java:1578)
 at org.testng.Assert.assertTrue(Assert.java:57)
 at org.testng.Assert.assertTrue(Assert.java:67)
-at runFailesTCMethod2.ClassA.Testcase2(ClassA.java:16)
+at ListenerTestNG.TestClass.TestCase3(TestClass.java:23)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -56,29 +60,17 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-        <test-method retried="true" signature="Testcase2()[pri:0, instance:runFailesTCMethod2.ClassA@791f145a]" started-at="2023-10-06T12:26:08 IST" name="Testcase2" finished-at="2023-10-06T12:26:08 IST" duration-ms="1" status="SKIP">
-          <exception class="java.lang.AssertionError">
+        </test-method> <!-- TestCase3 -->
+        <test-method signature="TestCase4()[pri:0, instance:ListenerTestNG.TestClass@13e344d]" started-at="2023-10-06T13:46:49 IST" name="TestCase4" finished-at="2023-10-06T13:46:49 IST" depends-on-methods="ListenerTestNG.TestClass.TestCase3" duration-ms="1" status="SKIP">
+          <exception class="java.lang.Throwable">
             <message>
-              <![CDATA[expected [true] but found [false]]]>
+              <![CDATA[Method ListenerTestNG.TestClass.TestCase4() on instance ListenerTestNG.TestClass@13e344d depends on not successfully finished methods 
+[ListenerTestNG.TestClass.TestCase3() on instance ListenerTestNG.TestClass@13e344d]]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
-at org.testng.Assert.fail(Assert.java:111)
-at org.testng.Assert.failNotEquals(Assert.java:1578)
-at org.testng.Assert.assertTrue(Assert.java:57)
-at org.testng.Assert.assertTrue(Assert.java:67)
-at runFailesTCMethod2.ClassA.Testcase2(ClassA.java:16)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
-at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:248)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:62)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+              <![CDATA[java.lang.Throwable: Method ListenerTestNG.TestClass.TestCase4() on instance ListenerTestNG.TestClass@13e344d depends on not successfully finished methods 
+[ListenerTestNG.TestClass.TestCase3() on instance ListenerTestNG.TestClass@13e344d]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:156)
 at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
 at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
 at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
@@ -99,57 +91,21 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+          </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-        <test-method signature="Testcase2()[pri:0, instance:runFailesTCMethod2.ClassA@791f145a]" started-at="2023-10-06T12:26:08 IST" name="Testcase2" finished-at="2023-10-06T12:26:08 IST" duration-ms="2" status="FAIL">
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[expected [true] but found [false]]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: expected [true] but found [false]
-at org.testng.Assert.fail(Assert.java:111)
-at org.testng.Assert.failNotEquals(Assert.java:1578)
-at org.testng.Assert.assertTrue(Assert.java:57)
-at org.testng.Assert.assertTrue(Assert.java:67)
-at runFailesTCMethod2.ClassA.Testcase2(ClassA.java:16)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
-at org.testng.internal.invokers.TestInvoker.retryFailed(TestInvoker.java:248)
-at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:62)
-at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:848)
-at org.testng.TestRunner.run(TestRunner.java:621)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-at org.testng.TestNG.runSuites(TestNG.java:1114)
-at org.testng.TestNG.run(TestNG.java:1082)
-at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
-at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
+        </test-method> <!-- TestCase4 -->
+      </class> <!-- ListenerTestNG.TestClass -->
+      <class name="ListenerTestNG.TestClass1">
+        <test-method signature="TestCase5()[pri:0, instance:ListenerTestNG.TestClass1@2ddc9a9f]" started-at="2023-10-06T13:46:49 IST" name="TestCase5" finished-at="2023-10-06T13:46:49 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Testcase2 -->
-      </class> <!-- runFailesTCMethod2.ClassA -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+        </test-method> <!-- TestCase5 -->
+        <test-method signature="TestCase6()[pri:0, instance:ListenerTestNG.TestClass1@2ddc9a9f]" started-at="2023-10-06T13:46:49 IST" name="TestCase6" finished-at="2023-10-06T13:46:49 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TestCase6 -->
+      </class> <!-- ListenerTestNG.TestClass1 -->
+    </test> <!-- SmokeTest -->
+  </suite> <!-- SmokeSuite -->
 </testng-results>
