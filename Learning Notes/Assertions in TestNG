@@ -1,0 +1,132 @@
+What is Assertion?
+ Assertion determines the state of the application whether it is the same what we are expecting or not.
+ While using Selenium for automated testing of web applications, we need to add validations in our tests to report them as pass or fail.
+ Assertions give you a way (other than If-Else blocks) to test conditions.
+There are two types of Assertions in TestNG: Hard Assertion(Assert) and Soft Assertion(Verify
+
+Hard Assertions – It is the default assert mechanism built into TestNG’s “org.testng.Assert” package. We use it when a test has to stop immediately after the assertion fails.
+Hard Assertion is an Assertion that throws the AssertException when the test case is failed. In the case of Hard Assertion, you can handle the error by using a catch block like a java exception. A Hard Assertion contains the following methods:
+assertEquals
+assertNotEquals
+assertTrue
+assertFalse
+assertNull
+assertNotNull  
+
+Example: In below example we will understand Hard Assertion, in below test class we have two test methods and testCase1 test method is getting failed at 3rd line. Once exception occurs remaining code will not be executed in testCase1. However testCase2 will be executed successfully. Look at the output
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class HardAssertionDemo {
+ 
+ @Test
+ public void testCase1() {
+  System.out.println("==================================");
+  System.out.println("Test1 Start");
+  Assert.assertTrue(false);
+  System.out.println("Test1 End");
+  System.out.println("==================================");
+ }
+ 
+ @Test
+ public void testCase2() {
+  System.out.println("==================================");
+  System.out.println("Test2 Start");
+  Assert.assertTrue(true);
+  System.out.println("Test2 End");
+  System.out.println("==================================");
+ }
+
+}
+
+Output:
+==================================
+
+Test1 Start
+
+==================================
+
+Test2 Start
+
+Test2 End
+
+==================================
+
+PASSED: testCase2
+
+FAILED: testCase1
+
+java.lang.AssertionError: expected [true] but found [false]
+
+ at org.testng.Assert.fail(Assert.java:96)
+
+The disadvantage of Hard Assert – It marks method as fail if assert condition gets failed and the remaining statements inside the method will be aborted.
+
+And sometimes we want to execute the whole script even if the assertion fails. This is not possible in Hard Assertion. To overcome this problem, we need to use a soft assertion in testng. 
+
+Soft Assertions (Verify):
+It is a custom assert mechanism supported by TestNG’s “org.testng.asserts.Softassert” package. We use it when a test has to continue execution even after an assertion fails in the sequence.
+Soft Assert does not throw an exception when an assert fails and would continue with the next step after the assert statement.
+If there is any exception and you want to throw it then you need to use assertAll() method as a last statement in the @Test and test suite again continue with next @Test as it is.
+
+Example:
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+public class SoftAssertionDemo {
+
+ SoftAssert obj= new SoftAssert();
+
+ SoftAssert obj1= new SoftAssert();
+
+
+ @Test
+ public void testCase1() {
+  System.out.println("==================================");
+  System.out.println("Test1 Start");
+  obj.assertTrue(false);
+  obj.assertEquals("Hi", "Hi");
+  System.out.println("Test1 End");
+  System.out.println("==================================");
+  obj.assertAll();
+
+ }
+ @Test
+ public void testCase2() {
+  System.out.println("==================================");
+  System.out.println("Test2 Start");
+  obj1.assertTrue(true);
+  obj1.assertEquals("HELLO", "HELLO");
+  System.out.println("Test2 End");
+  System.out.println("==================================");
+  obj1.assertAll();
+
+ }
+
+}
+
+Output:
+==================================
+
+Test1 Start
+
+Test1 End
+
+==================================
+
+==================================
+
+Test2 Start
+
+Test2 End
+
+==================================
+
+PASSED: testCase2
+
+FAILED: testCase1
+
+java.lang.AssertionError: The following asserts failed:
+
+ expected [true] but found [false]
