@@ -1,0 +1,25 @@
+Maven Introduction and setup maven in eclipse
+1)	Maven bill and project management tool developed by Apache software foundation.
+2)	It was initially released in 13th July 2004
+3)	it was written in Java language and user to build and manage projects return in other languages like C#, Ruby, Python etc.
+4)	It helps to build projects dependency and documentation its development process is very similar to ANT however it is much advanced than ANT.
+5)	The main feature of maven is that it can download the project dependency libraries automatically
+
+
+
+How to Install and Setup Maven
+
+1. To setup Maven, download the maven’s latest version form Apache depending upon different OS.
+Link: http://maven.apache.org/download.cgi
+2. Download required as per OS.
+3. Extract the File, and place it in C: drive.
+Rename the file from Apache Maven (version) to simple Maven for just usability.
+C:\Program Files\Maven.
+4. Once we have downloaded, all that we are now left to do before start using MAVEN is set a couple of environment variables. To do that, right click Computer >> Properties >> Advanced >> Environment Variables.
+5. First you need to set the new variable as "MAVEN_HOME" and provide the path where the Maven is stored in C drive (as above mentioned C:\Program Files\Maven).
+Next we need to add the bin folder to the Path. Select the Path in System variables and Click on Edit.
+Add the path of the Maven Build Folder as %MAVEN_HOME%/bin or simply as (C:\Program Files\Maven\bin).
+6. There we go, we are set and ready to hit MAVEN commands. So, firstly lets test to see if MAVEN is working fine. A simple MAVEN command is mvn --version.
+7. How to verify Maven eclipse plugin is installed:
+In Eclipse Navigate to Help--> Install new software
+And as per below image click on already installed link and verify the eclipse maven plugin is present as per second image.
