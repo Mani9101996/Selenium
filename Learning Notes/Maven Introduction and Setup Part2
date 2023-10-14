@@ -1,0 +1,44 @@
+What is a build tool?
+The build tool is used to set up everything which is required to run your java code independently. It generates source code, compiling code, packaging code to a jar etc. 
+
+Maven is a build / project management tool, based on the concept of a project object model (POM) contains information of project and configuration information for the maven to build the project such as dependencies, build directory, source directory, test source directory, plugin, goals etc.
+
+Maven provides a common platform to perform these activities which makes programmer’s life easier while handling the huge project.
+
+Common problems:
+1. Problem of multiple jars – let’s say we are using a couple of frameworks in our code, for instance selenium server, testNG , JXL or POI library etc. In order to use these frameworks within my application I need to include all the required jars in my application, I need to make them available.
+
+Sometimes we miss out on some jars, sometimes we don’t know what jars are needed. So MAVEN helps us on this aspect.
+
+2. Dependencies and Versions – Let’s say we have a particular jar and that jar has a dependency on other jar. Then I need to make sure that all my dependencies are closed, I need to make sure I have supplied all the required dependencies.
+
+Maven provides pom.xml which is the core of any project. This is the configuration file where all required information’s are kept.
+
+Maven downloads the dependency jar from a central repository. Most of the commonly used libraries are available in https://mvnrepository.com/repos/central.
+
+
+The user has to configure the remote repository in pom.xml to download from the remote repository. Below is the example of configuring a remote repository to pom.xml file. Provide id and URL of the repository where libraries are stored.
+
+<repositories>
+     <repository>
+         <id>libraryId</id>
+         <url>http://comanyrepositryId</url>
+     </repository>
+</repositories>
+
+Uses in Selenium:
+We can create Maven project for writing script and create dependency-using POM.xml once dependency is set Maven will download all the dependent jar files automatically and in future if any update comes from Selenium or TestNG side it will simply update all the required changes.
+
+General Phrases used in Maven:
+groupId: Generally groupId refers to domain id. For best practices company name is used as groupId. It identifies the project uniquely.
+artifactId: It is basically the name of the Jar without version.
+version: This tag is used to create a version of the project.
+Local repository: Maven downloads all the required dependencies and stores in the local repository called m2.
+
+Maven Build Life Cycle:
+Basic maven phases are used as below.
+clean: deletes all artifacts and targets which are created already.
+compile: used to compile the source code of the project.
+test: test the compiled code and these tests do not require to be packaged or deployed.
+package: package is used to convert your project into a jar or war etc.
+install: install the package into the local repository for use of another project.
