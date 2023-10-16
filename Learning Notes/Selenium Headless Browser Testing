@@ -1,0 +1,101 @@
+What Is Headless Browser?
+A headless browser is a web-browser without a graphical user interface. This program will behave just like a browser but will not show any GUI.
+
+Benefits Of Headless Browser Testing
+1. Since this type of testing does not actually open a browser, the system saves the processing power that would otherwise be used in a real browser test. Consequently, the tests are executed faster.
+2. Allows testing browser less setups.
+There may be setups where installing a browser is not possible, such as servers. In these cases, headless browsers help run automation tests easily.
+3. Helps you multitask
+You can use your browser or your machine to do anything else while the tests run in the background. Save hours of time that is otherwise spent staring at the screen.
+
+Some of the examples of Headless Drivers include
+HtmlUnit
+Ghost
+PhantomJS
+ZombieJS
+Watir-webdriver
+In this tutorial we will focus on HtmlUnit and PhatomJS
+
+Headless Browser Testing Using HTMLUnitDriver
+HTML UnitDriver is the most light weight and fastest implementation headless browser for of WebDriver. It is based on HtmlUnit. It is known as Headless Browser Driver. It is same as Chrome, IE, or FireFox driver, but it does not have GUI so one cannot see the test execution on screen.
+Steps:
+1. You need Eclipse with Selenium installed
+2. Download the HTMLUnit Driver. Add the jar to your project
+https://github.com/SeleniumHQ/htmlunit-driver/releases
+
+Program:
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.testng.annotations.Test;
+
+public class HTMLUnitTest {
+
+ @Test
+ public void headLessBrowserTest() {
+  WebDriver driver = new HtmlUnitDriver();
+  driver.get("https://www.google.com/");
+  driver.findElement(By.name("q")).sendKeys("Test");
+  String titleString=driver.getTitle();
+  System.out.println("Page title is: "+titleString);
+  String urlString=driver.getCurrentUrl();
+  System.out.println("Page URL is: "+urlString);
+  driver.quit();
+ }
+}
+
+Output:
+Page title is: Google
+Page URL is: https://www.google.com/
+PASSED: headLessBrowserTest
+
+===============================================
+    Default test
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
+
+Headless Browser Testing Using PhantomJS
+PhantomJS is a headless browser with JavaScript API. It is an optimal solution for Headless Website Testing, access and manipulate webpages & comes with the standard DOM API.
+
+In order to use PhantomJS with Seleniun, one has to use GhostDriver. GhostDriver is a implementation of Webdriver Wire protocol in simple JS for PhantomJS.
+1. You need Eclipse with Selenium installed
+2. Download PhantomJS
+https://phantomjs.org/download.html
+3. Extract the downloaded folder to Program Files
+4. Download the PhantomJS Driver. Add the jar to your project
+
+Program:
+import java.io.File;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.testng.annotations.Test;
+
+public class PhantomJS {
+
+ @Test
+ public void headLessBrowserTest() {
+  File file = new File(
+    "C:\\Users\\Hitendra\\Downloads\\phantomjs-2.1.1-windows\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
+  System.setProperty("phantomjs.binary.path", file.getAbsolutePath());
+  WebDriver driver = new PhantomJSDriver();
+  driver.get("https://www.google.com/");
+  driver.findElement(By.name("q")).sendKeys("Test");
+  String titleString = driver.getTitle();
+  System.out.println("Page title is: " + titleString);
+  String urlString = driver.getCurrentUrl();
+  System.out.println("Page URL is: " + urlString);
+  driver.quit();
+ }
+}
+
+Output:
+Page title is: Google
+Page URL is: https://www.google.com/#spf=1586097652826
+[INFO  - 2020-04-05T14:40:53.977Z] ShutdownReqHand - _handle - About to shutdown
+PASSED: headLessBrowserTest
+
+===============================================
+    Default test
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
