@@ -1,0 +1,45 @@
+We are going to use ChromeOptions class to run out test case on Chrome Browser in HeadLess mode.
+ChromeOptions is a Class to manage options specific to ChromeDriver.
+
+Please refer below Program to run tests in headless mode using Chrome Driver.
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.Test;
+
+public class HeadlessChrome {
+ @Test
+ public void headlessTest() throws IOException {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+  ChromeOptions chromeOptions= new ChromeOptions();
+  chromeOptions.addArguments("headless");
+  chromeOptions.addArguments("window-size=1200x600");
+  WebDriver driver= new ChromeDriver(chromeOptions);
+  driver.get("https://www.google.com/");
+  System.out.println("Test Start");
+  System.out.println("Google title is: "+driver.getTitle());
+  System.out.println("Test End");
+  TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+  File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+  FileUtils.copyFile(source, new File("D:\\Workspace_Eclipse\\WebDriverConcept3\\ScreenShot\\Headless.png"));
+  driver.close(); 
+ }
+}
+
+Output:
+
+Test Start
+Google title is: Google
+Test End
+PASSED: headlessTest
+
+===============================================
+    Default test
+    Tests run: 1, Failures: 0, Skips: 0
+===============================================
