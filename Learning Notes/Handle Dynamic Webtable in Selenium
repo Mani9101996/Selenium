@@ -1,0 +1,336 @@
+What is Web Table?
+A table is made of rows and columns. When we create a table for a web page, that is called as a web table. In HTML, table is created using <table> tag. 
+Web table is a HTML structure for creating rows and columns on a Web page.
+Basic Structure of Web Table: Below given the basic structure of a webtable which is having 2 rows and 3 columns.
+<table>
+ <tbody>
+  <tr>
+     <th>Employee Name</th>
+     <th>Designation</th> 
+     <th>Salary</th>
+   </tr>
+  <tr>
+     <td>John</td>
+     <td>Software Tester</td>
+     <td>50000</td>
+  </tr>
+  <tr>
+     <td>Tony</td>
+     <td>Sr. Software Tester</td>
+     <td>100000</td>
+  </tr>
+ </tbody>
+</table>
+
+Web Table Types?
+There are two types of HTML tables published on the web-
+Static tables: Data is static i.e. Number of rows and columns are fixed.
+Dynamic tables: Data is dynamic i.e. Number of rows and columns are NOT fixed.
+We are going to handle following web table questions in this post.
+How to get the table headers?
+Count no of rows and column in a web table
+Get value from particular column wrt given data
+Conditional (get all employees > 40 yrs)
+How to Print last row in a web table?
+Get particular cell value
+Get particular cell value using custom method
+How to get all table data
+How to get Particular Column
+How to retrieve More Than One Column
+Please refer the below programs to handle above questions:
+
+Base Class: In this class, we are having setup method to launch the browser and some variables 
+
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class WebTableBaseClass {
+ WebDriver driver;
+ String xpathString2="//table";
+
+ // test case#2,8
+ List<WebElement> c;
+ List<WebElement> r;
+ 
+ // test case#3
+ String empRole = "Software Engineer";
+ int empPosColumn = 2;
+ int empNameColumn = 1;
+
+ // test case#4
+ int empAge = 40;
+ int empAgeColumn = 4;
+
+ // test case#6
+ int rowN = 2;
+ int colN = 3;
+
+ // test case#7
+ public String getColValue(int row, int col) {
+  WebElement colValue = driver
+    .findElement(By.xpath(""+xpathString+"/tbody/tr[" + row + "]/td[" + col + "]"));
+  return colValue.getText();
+ }
+ // test case#9
+ int getcolNo = 2;
+
+ // test case#10
+ int noOfColumns = 3;
+
+ // test case#11
+ int firstColumnNo = 2;
+ int secondColumnNo = 5;
+
+ public void setup() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.seleniumeasy.com/test/table-sort-search-demo.html");
+  c = driver.findElements(By.xpath(""+xpathString+"/thead/tr/th"));
+  r = driver.findElements(By.xpath(""+xpathString+"/tbody/tr"));
+ }
+}
+
+TestClass: This is our test class and we have all our test cases in this class. This class extending the above BaseClass.
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
+public class WebtableDemo extends WebTableBaseClass {
+
+ @Test(priority = 1, description = "Get the Table Headers")
+ public void getTableHeaders() {
+  setup();
+  System.out.println("=========Get Table Headers======================");
+  List<WebElement> allHeadersOfTable = driver.findElements(By.xpath(""+xpathString+"/thead/tr/th"));
+  System.out.println("Headers in table are below:");
+  System.out.println("Total headers found: " + allHeadersOfTable.size());
+  for (WebElement header : allHeadersOfTable) {
+   System.out.println(header.getText());
+  }
+  System.out.println("================================================");
+ }
+
+ @Test(priority = 2, description = "Count total Rows And Coulmns")
+ public void countRowsAndCoulmns() {
+  setup();
+  System.out.println("=========countRowsAndCoulmns===================");
+  // Total Columns are
+  System.out.println("Total Columns: " + c.size());
+  // Total Rows are
+  System.out.println("Total Rows: " + r.size());
+  System.out.println("================================================");
+ }
+
+ @Test(priority = 3, description = "Get the Employee Position whose designation is SW Engg.")
+ public void getEmpPosition() {
+  setup();
+  System.out.println("=======Get All Emp Names of "+empRole+" position=======");
+  for (int i = 1; i <= r.size(); i++) {
+   WebElement posColumn = driver.findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td["+empPosColumn+"]"));
+   if (posColumn.getText().toLowerCase().equalsIgnoreCase(empRole)) {
+    WebElement empNameColumn1 = driver
+      .findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td["+empNameColumn+"]"));
+    System.out.println(empNameColumn1.getText());
+   }
+  }
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 4, description = "Get the name of the employees Age>40")
+ public void getAge() {
+  setup();
+  System.out.println("=======Get All Emp Names whose age>40===========");
+  for (int i = 1; i <= r.size(); i++) {
+   WebElement ageColumn = driver.findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td["+empAgeColumn+"]"));
+   if (Integer.parseInt(ageColumn.getText()) >= empAge) {
+    WebElement empName = driver.findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td["+empNameColumn+"]"));
+    System.out.println(empName.getText());
+   }
+  }
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 5, description = "Print the Last Row")
+ public void printLastRow() {
+  setup();
+  System.out.println("================Get Last Row of table================");
+  List<WebElement> columnOfLastRow = driver.findElements(By.xpath(""+xpathString+"/tbody/tr[last()]/td"));
+  for (WebElement e : columnOfLastRow) {
+   System.out.print(e.getText() + "   ");
+  }
+  System.out.println();
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 6, description = "Get particular Cell Value")
+ public void getCellValue() {
+  setup();
+  System.out.println("====Retrive cell value by providing row and column number========");
+  WebElement colValue = driver
+    .findElement(By.xpath(""+xpathString+"/tbody/tr[" + rowN + "]/td[" + colN + "]"));
+  System.out.println("Cell Value : " + colValue.getText());
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 7, description = "Get Cell Value By CustomMethod")
+ public void getCellValueByCustomMethod() {
+  setup();
+  System.out.println("====Retrive cell value by providing row and column number========");
+  System.out.println(getColValue(2, 3));
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 8, description = "Get All TableData")
+ public void getAllTableData() {
+  setup();
+  System.out.println("====================Retrive All table data============");
+  for (int i = 1; i <= r.size(); i++) {
+
+   for (int j = 1; j <= c.size(); j++) {
+
+    System.out.print(
+      driver.findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td[" + j + "]")).getText()
+        + "   ");
+   }
+   System.out.println();
+   System.out.println();
+  }
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 9, description = "Get Particular Column")
+ public void getParticularColumn() {
+  setup();
+  System.out.println("===========================get particular Column========================");
+  for (int i = 1; i <= r.size(); i++) {
+   WebElement element = driver
+     .findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td[" + getcolNo + "]"));
+   System.out.println(element.getText());
+  }
+  System.out.println("===================================================");
+ }
+
+ @Test(priority = 10, description = "Retrive More Than One Column")
+ public void retriveMoreThanOneColumn() {
+  setup();
+  System.out.println("===========retriveMoreThanOneColumns==========");
+  for (int i = 1; i <= r.size(); i++) {
+
+   for (int j = 1; j <= noOfColumns; j++) {
+
+    System.out.print(
+      driver.findElement(By.xpath(""+xpathString+"/tbody/tr[" + i + "]/td[" + j + "]")).getText()
+        + "   ");
+   }
+   System.out.println();
+  }
+  System.out.println("===================================================");
+ }
+ @AfterMethod
+ public void tearDown() {
+  driver.close();
+ }
+}
+
+Output: The output looks like below
+
+=========Get Table Headers======================
+Headers in table are below:
+Total headers found: 6
+Name
+Position
+Office
+Age
+Start date
+Salary
+================================================
+
+=========countRowsAndCoulmns===================
+Total Columns: 6
+Total Rows: 10
+================================================
+
+=======Get All Emp Names of Software Engineer position=======
+B. Greer
+B. Wagner
+===================================================
+
+=======Get All Emp Names whose age>40===========
+A. Cox
+A. Ramos
+B. Greer
+B. Williamson
+===================================================
+
+================Get Last Row of table================
+C. Vance   Pre-Sales Support   New York   21   Mon 12th Dec 11   $106,450/y   
+===================================================
+
+====Retrive cell value by providing row and column number========
+Cell Value : London
+===================================================
+
+====Retrive cell value by providing row and column number========
+London
+===================================================
+
+====================Retrive All table data============
+A. Cox   Junior Technical Author   San Francisco   66   Mon 12th Jan 09   $86,000/y   
+
+A. Ramos   Chief Executive Officer (CEO)   London   47   Fri 9th Oct 09   $1,200,000/y   
+
+A. Satou   Accountant   Tokyo   33   Fri 28th Nov 08   $162,700/y   
+
+B. Greer   Software Engineer   London   41   Sat 13th Oct 12   $132,000/y   
+
+B. Wagner   Software Engineer   San Francisco   28   Tue 7th Jun 11   $206,850/y   
+
+B. Williamson   Integration Specialist   New York   61   Sun 2nd Dec 12   $372,000/y   
+
+C. Hurst   Javascript Developer   San Francisco   39   Tue 15th Sep 09   $205,500/y   
+
+C. Kelly   Senior Javascript Developer   Edinburgh   22   Thu 29th Mar 12   $433,060/y   
+
+C. Marshall   Regional Director   San Francisco   36   Thu 16th Oct 08   $470,600/y   
+
+C. Vance   Pre-Sales Support   New York   21   Mon 12th Dec 11   $106,450/y   
+
+===================================================
+
+===========================get particular Column========================
+Junior Technical Author
+Chief Executive Officer (CEO)
+Accountant
+Software Engineer
+Software Engineer
+Integration Specialist
+Javascript Developer
+Senior Javascript Developer
+Regional Director
+Pre-Sales Support
+===================================================
+
+===========retriveMoreThanOneColumns==========
+A. Cox   Junior Technical Author   San Francisco   
+A. Ramos   Chief Executive Officer (CEO)   London   
+A. Satou   Accountant   Tokyo   
+B. Greer   Software Engineer   London   
+B. Wagner   Software Engineer   San Francisco   
+B. Williamson   Integration Specialist   New York   
+C. Hurst   Javascript Developer   San Francisco   
+C. Kelly   Senior Javascript Developer   Edinburgh   
+C. Marshall   Regional Director   San Francisco   
+C. Vance   Pre-Sales Support   New York   
+===================================================
+
+===============================================
+    Default test
+    Tests run: 10, Failures: 0, Skips: 0
+===============================================
