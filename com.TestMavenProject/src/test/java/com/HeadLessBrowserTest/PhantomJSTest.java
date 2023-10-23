@@ -10,7 +10,7 @@ public class PhantomJSTest {
 
 	 @Test
 	 public void headLessBrowserTest() {
-	  File file = new File("\"D:\\Trainings & Learnings\\Selenium Project\\Selenium libraries\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe\"");
+	  File file = new File("D:\\Trainings & Learnings\\Selenium Project\\Selenium libraries\\phantomjs-2.1.1-windows\\bin\\phantomjs.exe");
 	  System.setProperty("phantomjs.binary.path", file.getAbsolutePath());
 	  WebDriver driver = new PhantomJSDriver();
 	  driver.get("https://www.google.com/");
