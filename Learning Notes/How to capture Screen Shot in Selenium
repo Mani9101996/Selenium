@@ -1,0 +1,110 @@
+Why Screen shots are required?
+When application issues occur
+When an assertion failure occurs
+It is helpful to track the execution when working with headless browser.
+It helps us to understand the flow of the application.
+For cross browser testing.
+When there is some difficulty in finding web elements on a page
+Where there is a Timeout in finding web elements on a web page
+Screenshots are desirable for bug analysis. Selenium can automatically take screenshots during execution. You need to type cast WebDriver instance to TakesScreenshot.
+
+Taking Screenshot in Selenium is just 3 Step process:
+
+Step 1: Convert web driver object to TakesScreenshot
+TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+Step 2: Call getScreenshotAs method to create image file
+File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+Step 3: Copy file to Desired Location
+Example: In this example we will take screen capture of https://google.com & save it as D:\Workspace_Eclipse\ScreehShotDemo\ScreenShot
+
+Please refer below example
+
+Utility Class where we kept screenShot method
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
+public class TakeScreenShot {
+ 
+ public static void screenShot(WebDriver driver, String filename) {
+  TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+  File source = takesScreenshot.getScreenshotAs(OutputType.FILE);
+  try {
+   FileUtils.copyFile(source, new File(System.getProperty("user.dir")+"\\ScreenShot\\"+filename+".png"));
+  } catch (Exception e) {
+   // TODO Auto-generated catch block
+   e.getMessage();
+  }
+ }
+}
+
+Test Class where we have created few test cases and called screenShot method to take the screen shots :
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import com.utility.TakeScreenShot;
+
+public class ScreenShotTest {
+ WebDriver driver;
+
+ @BeforeMethod
+ public void setup() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://www.google.com/");
+ }
+ @Test
+ public void testCase1() {
+  driver.findElement(By.name("q")).sendKeys("ScreenShot Demo");
+  Assert.assertTrue(false);
+                TakeScreenShot.screenShot(driver, "testCase1");
+
+
+}
+ @Test
+ public void testCase2() {
+  Assert.assertTrue(true);
+                TakeScreenShot.screenShot(driver, "testCase2");
+ }
+ @AfterMethod
+ public void tearDown() {
+  driver.close();
+ }
+}
+
+POM.xml file given below:
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+ <groupId>ScreehShotDemo</groupId>
+ <artifactId>ScreehShotDemo</artifactId>
+ <version>0.0.1-SNAPSHOT</version>
+ <dependencies>
+  <dependency>
+   <groupId>org.testng</groupId>
+   <artifactId>testng</artifactId>
+   <version>6.14.3</version>
+   <scope>test</scope>
+  </dependency>
+  <dependency>
+   <groupId>org.seleniumhq.selenium</groupId>
+   <artifactId>selenium-java</artifactId>
+   <version>3.141.59</version>
+  </dependency>
+  <dependency>
+   <groupId>commons-io</groupId>
+   <artifactId>commons-io</artifactId>
+   <version>2.6</version>
+  </dependency>
+ </dependencies>
+</project>
