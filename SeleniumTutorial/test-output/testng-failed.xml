@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [SmokeSuite]" guice-stage="DEVELOPMENT">
-  <listeners>
-    <listener class-name="ListenerTestNG.ListenerClass"/>
-  </listeners>
-  <test thread-count="5" name="SmokeTest(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="ListenerTestNG.TestClass">
+      <class name="ScreenshotTest.TestClass1">
         <methods>
-          <include name="TestCase3"/>
-          <include name="TestCase4"/>
+          <include name="tearDown"/>
+          <include name="setup"/>
+          <include name="testMethod"/>
         </methods>
-      </class> <!-- ListenerTestNG.TestClass -->
+      </class> <!-- ScreenshotTest.TestClass1 -->
     </classes>
-  </test> <!-- SmokeTest(failed) -->
-</suite> <!-- Failed suite [SmokeSuite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
