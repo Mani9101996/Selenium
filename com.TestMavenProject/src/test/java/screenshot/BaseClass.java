@@ -13,8 +13,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import com.google.common.io.Files;
 
 public class BaseClass {
-	 public WebDriver driver;	
-	public void initialize()
+	 public static WebDriver driver;	
+	public static void initialize()
 	{
 	System.setProperty("WebDriver.chrome.driver","D://Trainings & Learnings/Selenium Project/Selenium browser drivers/chromedriver-win64/chromedriver.exe");
 	WebDriver driver = new ChromeDriver();
