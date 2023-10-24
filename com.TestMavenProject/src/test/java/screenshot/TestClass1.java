@@ -1,5 +1,6 @@
 package screenshot;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
@@ -14,7 +15,8 @@ public void setup()
 }
 @Test
 public void testMethod() {
-	   driver.findElement(null);
+	 //  driver.findElement(null);
+	Assert.assertTrue(false);
 }
 
 @AfterTest
