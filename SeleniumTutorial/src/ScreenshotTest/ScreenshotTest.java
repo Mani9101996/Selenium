@@ -34,7 +34,7 @@ public class ScreenshotTest {
 			Assert.assertTrue(false);		
 			//Assert.assertTrue(true);		
 			  File  f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-					Files.copy(f,new File("C:\\Users\\manit\\git\\Selenium\\SeleniumTutorial\\Screenshot\\Screenshot3.png"));
+					Files.copy(f,new File("C:\\Users\\manit\\git\\Selenium\\SeleniumTutorial\\Screenshot\\Screenshot4.png"));
 
 				  driver.close();	
 				 
