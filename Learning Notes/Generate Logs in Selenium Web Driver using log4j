@@ -1,0 +1,232 @@
+What is log and why it is required?
+During the execution of test case, user wants some information to be logged in the console. Information could be any detail depends upon the purpose. Keeping this in mind that we are using Selenium for testing, we need the information which helps the user to understand the test steps or any failure during the test case execution. With the help of Log4j it is possible to enable loggings during the Selenium test case execution
+
+What is log4j?
+Log4j is a fast, flexible and reliable logging framework written in Java developed in 1996. It is distributed under the Apache Software License.
+This is used for logging mechanism for small to large scale selenium automation projects.
+Why log4j?
+It is an open source
+With Log4j, it is possible to store the flow details of our Selenium Automation in a file, console or database.
+It can be used for large as well as small projects.
+
+Log 4j Components:
+Loggers: It is responsible for logging information.
+Create the instance of logger class
+Log4j level: Primarily there are five kinds of log levels
+All - This level of logging will log everything ( it turns all the logs on )
+DEBUG – print the debugging information and is helpful in development stage
+INFO – print informational message that highlights the progress of the application
+WARN – print information regarding faulty and unexpected system behavior.
+ERROR – print error message that might allow system to continue
+FATAL – print system critical information which are causing the application to crash
+OFF – No logging
+ Appenders: It is used to deliver LogEvents to their destination.
+ConsoleAppender logs to standard output
+File appender prints logs to some file
+Rolling file appender to a file with maximum size
+Layouts: It is responsible for formatting logging information in different styles.
+Steps:
+ Create a Project and add required dependencies (like selenium-java and TestNG etc.) if you are using Maven Project.
+ Download log4j jar files or get the dependency if you are using maven project.
+ Create an log4j.xml configuration file. Keep it in your project directory.
+ Create a utility class (Log) to Initialize Log4j logs.
+ Create Base Class and configure your log4j.xml using DOMConfigurator.
+ Write your test cases using test class.
+Please refer below complete setup and project.
+
+log4j.xml file
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+ 
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="Target" value="System.out"/>
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+    </layout>
+  </appender>
+ 
+  <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="log4j.log"/>
+    <layout class="org.apache.log4j.PatternLayout">
+    <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+    </layout>
+  </appender>
+ 
+  <root>
+    <priority value ="debug"></priority>
+    <appender-ref ref="console"></appender-ref>
+    <appender-ref ref="fileAppender"></appender-ref>
+  </root>
+ 
+</log4j:configuration>
+
+log4j Utility Class:
+
+package com.utility;
+
+import org.apache.log4j.Logger;
+
+public class Log {
+ 
+ // Initialize Log4j logs
+ public static Logger Log = Logger.getLogger(Log.class.getName());//
+
+ public static void startTestCase(String sTestCaseName){    
+   Log.info("====================================="+sTestCaseName+" TEST START=========================================");
+   }
+ 
+ public static void endTestCase(String sTestCaseName){
+   
+  Log.info("====================================="+sTestCaseName+" TEST END=========================================");
+   }
+ 
+ // Need to create below methods, so that they can be called  
+
+  public static void info(String message) {
+
+   Log.info(message);
+
+   }
+
+  public static void warn(String message) {
+
+     Log.warn(message);
+
+  }
+
+  public static void error(String message) {
+
+     Log.error(message);
+
+  }
+
+  public static void fatal(String message) {
+
+     Log.fatal(message);
+
+  }
+
+  public static void debug(String message) {
+
+     Log.debug(message);
+
+  }
+ 
+}
+
+BaseClass: To configure log4j.xml file and initialize web driver.
+import org.apache.log4j.xml.DOMConfigurator;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
+
+import com.utility.Log;
+
+public class BaseClass {
+ public WebDriver driver;
+ 
+ @BeforeSuite
+ public void beforeSuite() {
+  DOMConfigurator.configure("log4j.xml");
+  Log.info("This is beforeSuite Method");
+ }
+ 
+ @BeforeMethod
+ public void setup() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+  driver = new ChromeDriver();
+  driver.manage().window().maximize();
+  driver.get("https://s1.demo.opensourcecms.com/wordpress/wp-login.php");
+ }
+ 
+ @AfterMethod
+ public void tearDown() {
+  driver.close();
+ }
+ 
+ @AfterSuite
+ public void afterSuite() {
+  Log.info("This is afterSuite Method");
+ }
+}
+
+TestClass1:
+import org.testng.annotations.Test;
+import com.utility.Log;
+
+public class TestClass1 {
+ 
+ @Test
+ public void testCase1() {
+  Log.startTestCase("testCase1");
+  Log.info("This is testCase1");
+  Log.endTestCase("testCase1");
+ }
+ @Test
+ public void testCase2() {
+  Log.startTestCase("testCase2");
+  Log.info("This is testCase2");
+  Log.endTestCase("testCase2");
+ }
+ @Test
+ public void testCase3() {
+  Log.startTestCase("testCase3");
+  Log.info("This is testCase3");
+  Log.endTestCase("testCase3");
+ }
+
+}
+
+TestClass2:
+import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import com.baseClass.BaseClass;
+import com.utility.Log;
+
+public class TestClass2 extends BaseClass {
+ 
+ @Test
+ public void wordPressTest() {
+  Log.startTestCase("wordPressTest");
+  Log.info("Entering User Name");
+  driver.findElement(By.id("user_login")).sendKeys("opensourcecms");
+  Log.info("Entering User Password");
+  driver.findElement(By.id("user_pass")).sendKeys("opensourcecms");
+  Log.info("Click on Login Button");
+  driver.findElement(By.id("wp-submit")).click();
+  Log.info("Home Page");
+  Log.info("Get Current URL");
+  String urlString=driver.getCurrentUrl();
+  Log.info("Validate the URL");
+  String expectedURL="https://s1.demo1.opensourcecms.com/wordpress/wp-admin/";
+  Assert.assertEquals(urlString, expectedURL);
+  Log.info("URL Matches");
+  Log.endTestCase("wordPressTest");
+ }
+
+}
+
+Output:  Following logs will be captured in file as well as on console.
+2020-05-04 00:21:50 INFO  Log:23 - This is beforeSuite Method
+2020-05-04 00:21:50 INFO  Log:11 - =====================================testCase1 TEST START=========================================
+2020-05-04 00:21:50 INFO  Log:23 - This is testCase1
+2020-05-04 00:21:50 INFO  Log:16 - =====================================testCase1 TEST END=========================================
+2020-05-04 00:21:50 INFO  Log:11 - =====================================testCase2 TEST START=========================================
+2020-05-04 00:21:50 INFO  Log:23 - This is testCase2
+2020-05-04 00:21:50 INFO  Log:16 - =====================================testCase2 TEST END=========================================
+2020-05-04 00:21:50 INFO  Log:11 - =====================================testCase3 TEST START=========================================
+2020-05-04 00:21:50 INFO  Log:23 - This is testCase3
+2020-05-04 00:21:50 INFO  Log:16 - =====================================testCase3 TEST END=========================================
+2020-05-04 00:21:58 INFO  Log:11 - =====================================wordPressTest TEST START=========================================
+2020-05-04 00:21:58 INFO  Log:23 - Entering User Name
+2020-05-04 00:21:58 INFO  Log:23 - Entering User Password
+2020-05-04 00:21:59 INFO  Log:23 - Click on Login Button
+2020-05-04 00:22:02 INFO  Log:23 - Home Page
+2020-05-04 00:22:02 INFO  Log:23 - Get Current URL
+2020-05-04 00:22:02 INFO  Log:23 - Validate the URL
+2020-05-04 00:22:03 INFO  Log:23 - This is afterSuite Method
