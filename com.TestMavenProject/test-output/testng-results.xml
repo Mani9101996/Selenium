@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="4" passed="3" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-10-26T16:50:08 IST" name="Default suite" finished-at="2023-10-26T16:50:32 IST" duration-ms="23882">
+  <suite started-at="2023-10-30T16:32:56 IST" name="Suite" finished-at="2023-10-30T16:32:56 IST" duration-ms="158">
     <groups>
     </groups>
-    <test started-at="2023-10-26T16:50:08 IST" name="Default test" finished-at="2023-10-26T16:50:32 IST" duration-ms="23882">
-      <class name="com.Test.ElementScreenshotbyAShotAPI">
-        <test-method signature="ElementScreenshotbyAShotAPI()[pri:0, instance:com.Test.ElementScreenshotbyAShotAPI@273e7444]" started-at="2023-10-26T16:50:08 IST" name="ElementScreenshotbyAShotAPI" finished-at="2023-10-26T16:50:32 IST" duration-ms="23783" status="PASS">
+    <test started-at="2023-10-30T16:32:56 IST" name="Test" finished-at="2023-10-30T16:32:56 IST" duration-ms="158">
+      <class name="com.tests.TestClass1">
+        <test-method signature="testCase1()[pri:0, instance:com.tests.TestClass1@6fdbe764]" started-at="2023-10-30T16:32:56 IST" name="testCase1" finished-at="2023-10-30T16:32:56 IST" duration-ms="25" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- ElementScreenshotbyAShotAPI -->
-      </class> <!-- com.Test.ElementScreenshotbyAShotAPI -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- testCase1 -->
+        <test-method signature="testCase2()[pri:0, instance:com.tests.TestClass1@6fdbe764]" started-at="2023-10-30T16:32:56 IST" name="testCase2" finished-at="2023-10-30T16:32:56 IST" duration-ms="10" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase2 -->
+        <test-method signature="testCase3()[pri:0, instance:com.tests.TestClass1@6fdbe764]" started-at="2023-10-30T16:32:56 IST" name="testCase3" finished-at="2023-10-30T16:32:56 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCase3 -->
+      </class> <!-- com.tests.TestClass1 -->
+      <class name="com.tests.TestClass2">
+        <test-method signature="wordPressTest()[pri:0, instance:com.tests.TestClass2@2794eab6]" started-at="2023-10-30T16:32:56 IST" name="wordPressTest" finished-at="2023-10-30T16:32:56 IST" duration-ms="31" status="FAIL">
+          <exception class="java.lang.NullPointerException">
+            <message>
+              <![CDATA[Cannot invoke "org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)" because "driver" is null]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.findElement(org.openqa.selenium.By)" because "driver" is null
+at com.tests.TestClass2.wordPressTest(TestClass2.java:18)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:848)
+at org.testng.TestRunner.run(TestRunner.java:621)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+at org.testng.TestNG.runSuites(TestNG.java:1114)
+at org.testng.TestNG.run(TestNG.java:1082)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.NullPointerException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- wordPressTest -->
+      </class> <!-- com.tests.TestClass2 -->
+      <class name="com.baseClass.BaseClass">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:com.baseClass.BaseClass@2eae8e6e]" started-at="2023-10-30T16:32:56 IST" name="beforeSuite" finished-at="2023-10-30T16:32:56 IST" duration-ms="331" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeSuite -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:com.baseClass.BaseClass@2eae8e6e]" started-at="2023-10-30T16:32:56 IST" name="afterSuite" finished-at="2023-10-30T16:32:56 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterSuite -->
+      </class> <!-- com.baseClass.BaseClass -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
 </testng-results>

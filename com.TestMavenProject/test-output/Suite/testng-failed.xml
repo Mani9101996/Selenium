@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
-  <listeners>
-    <listener class-name="com.utility.ListenerClass"/>
-  </listeners>
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="com.testPackage.ScreenShotTest">
+      <class name="com.tests.TestClass2">
         <methods>
-          <include name="testCase1"/>
-          <include name="testCase2"/>
-          <include name="teardown"/>
+          <include name="wordPressTest"/>
         </methods>
-      </class> <!-- com.testPackage.ScreenShotTest -->
-      <class name="com.testPackage.TestClass">
-        <methods>
-          <include name="testCase4"/>
-          <include name="teardown"/>
-        </methods>
-      </class> <!-- com.testPackage.TestClass -->
+      </class> <!-- com.tests.TestClass2 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
