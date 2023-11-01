@@ -1,0 +1,109 @@
+What is Page Object Model?
+Page Object Model is a design pattern to create Object Repository for web UI elements. Under this model, for each web page in the application, there should be corresponding page class. This Page class will find the Web Elements of that web page and also contains Page methods which perform operations on those Web Elements.
+
+Non POM structure Vs POM Structure
+
+POM Advantages and Disadvantages:
+Advantages:
+Object Repository: You can create an Object Repository of the fields segmented page-wise. This as a result provides a Page Repository of the application as well. Each page will be defined as a java class. All the fields in the page will be defined in an interface as members. The class will then implement the interface.
+Reusability:  We can reuse the page class if required in different test cases . 
+Functional Encapsulation: All possible functionality or operations that can be performed on a page can be defined and contained within the same class created for each page. This allows for clear definition and scope of each page's functionality.
+Low maintenance: Any User Interface changes can swiftly be implemented into the interface as well as class.
+Programmer Friendly: Robust and more readable. The Object-oriented approach makes the framework programmer friendly.
+Low Redundancy: Helps reduce duplication of code. If the architecture is correctly and sufficiently defined, the POM gets more done in less code.
+Efficient & Scalable: Faster than other keyword-driven/data-driven approaches where Excel sheets are to be read/written.
+Disadvantages:
+High Setup Time & Effort:  Initial effort investment in development of Automation Framework is high. This is the biggest weight of POM in case of web applications with hundreds/thousands of pages. It is highly suggested that if this model is decided to be implemented, then it should be done parallel to development of the application.
+Skilled labour: Testers not technically sound or aware of programming best practices are a nightmare in this case. 
+There are two ways to implement Page Object Model.
+Basic Approach 
+Page Factory approach (@FindBy Annotation)
+
+
+Steps to be followed to create page classes
+Create a Java class for every page in the application.
+In each class, declare all the web Elements as variable.
+Implement corresponding methods acting on the variables.
+Steps to be followed to create test cases
+Initialize the driver and open the application.
+Create an object of page layer class and pass the driver instance.
+Using the object call the method from page layer class
+Repeat step#3 until all actions are performed and at the end close the browser.
+Below implementation given using basic approach:
+
+LoginPage Class:
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class LoginPage {
+ WebDriver driver;
+    //UI Elements
+ By username = By.id("txtUsername");
+ By password = By.name("txtPassword");
+ By loginBtn = By.xpath("//*[@id=\"btnLogin\"]");
+ By logo = By.xpath("//*[@id=\"divLogo\"]/img");
+    
+ //Constructor to initialize current class objects 
+ public LoginPage(WebDriver driver) {
+  this.driver=driver;
+ }
+ //User Actions methods
+ public boolean validateLogo() {
+  driver.findElement(logo).isDisplayed();
+  return true;
+ }
+ public HomePage login(String uname, String pswd) {
+  driver.findElement(username).sendKeys(uname);
+  driver.findElement(password).sendKeys(pswd);
+  driver.findElement(loginBtn).click();
+  return new HomePage();
+ }
+}
+
+LoginPageTest Class:
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import com.orangeHRM.pages.HomePage;
+import com.orangeHRM.pages.LoginPage;
+
+/**
+ * @author Hitendra
+ *  
+ */
+public class LoginPageTest {
+ public WebDriver driver;
+ LoginPage loginPage;
+ HomePage homepage;
+ 
+ @BeforeMethod
+ public void setUp() {
+  System.setProperty("webdriver.chrome.driver",
+    "C:\\Users\\Hitendra\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+  
+  driver= new ChromeDriver();
+  loginPage= new LoginPage(driver);
+  driver.manage().window().maximize();
+  driver.get("https://opensource-demo.orangehrmlive.com/index.php/auth/validateCredentials");
+ }
+ @Test
+ public void varifyLogo() {
+  
+  boolean flag=loginPage.validateLogo();
+  Assert.assertTrue(flag);
+ }
+ @Test
+ public void varifyLogin() {
+  homepage=loginPage.login("admin", "admin123");
+  String actualURL= driver.getCurrentUrl();
+  String expectedURL= "https://opensource-demo.orangehrmlive.com/index.php/dashboard";
+  Assert.assertEquals(actualURL, expectedURL);
+ }
+ @AfterMethod
+ public void tearDown() {
+  driver.close();
+ }
+}
