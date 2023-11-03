@@ -1,0 +1,85 @@
+In this post we will discuss about the following points:
+
+Traditional Approach Vs TDD
+What is BDD?
+TDD Vs BDD
+Agile and BDD
+Cucumber, Gherkin and BDD Example
+BDD Tools
+Traditional Approach
+
+A traditional development process would go as follows:
+
+Business needs - BRD.
+Product owners write requirements based on those business needs - SRS, FRS.
+Developers and testers (independently) translate those requirements into code and test cases.
+So Traditional Approach (Driven by coding) would be:
+
+Coding -> Test Case Creation -> Test Execution
+
+BRD (Business requirement Document)- Initiation phase- Why the requirements are being undertaken.
+
+SRS (Software Requirement Specification)- Planning Phase -What requirements must be fulfilled to satisfy business needs.
+
+FRS (Functional Requirement Specification)- Planning phase - How exactly the system is expected to function.
+
+TDD (Test Driven Development)
+
+Business needs.
+Create a collaborative space with developers and testers so that they can talk about what they’re going to develop together.
+During this phase they collaborate around requirements and define them as English format scenarios.
+Developers write code based on these scenarios and testers create automated test cases that report back against these scenarios.
+So Test Driven Development would be:
+
+Tests are created -> Run the tests (Will fail) -> Write the code to pass the tests
+
+What is BDD?
+Behavioral Driven Development (BDD) is a software development approach that has evolved from TDD (Test Driven Development).
+Behavior Driven Development (BDD) is a branch of Test Driven Development (TDD).
+It Improves communication between tech and non-tech teams and stakeholders.
+In both development approaches, tests are written ahead of the code, but in BDD, tests are more user-focused and based on the system’s behavior.
+BDD is a way for software teams to work that closes the gap between business people and technical people.
+BDD is more user focused – for this BDD use user stories for every feature to be tested Ex – Login feature.
+BDD uses human readable descriptions of user requirements – Writing the scripts using Gherkin Language.
+TDD vs. BDD
+BDD is in a more readable format by every stake holder since it is in English, unlike TDD test cases written in programming languages such as Ruby, Java etc.
+BDD explains the behavior of an application for the end user while TDD focuses on how functionality is implemented. Changes on functionality can be accommodated with less impact in BDD as opposed to TDD.
+Agile and BDD 
+Agile Planning work in small increments of value like User Stories. 
+BDD does not replace your existing agile process, it enhances it.
+BDD as a set of plug-in for your existing process that will make your team more able to deliver on the promises of agile:
+BDD encourages working in rapid iterations, continuously breaking down your user’s problems into small pieces that can flow through your development process as quickly as possible.
+What is Cucumber:
+It is a testing tool that supports Behavior Driven Development (BDD) framework. It defines application behavior using simple English text, defined by a language called Gherkin.
+
+Gherkin Language:
+It is a Business Readable, Domain Specific Language created especially for behavior descriptions.
+
+The ‘Given-When-And-Then’ formula BDD example
+This is the proposed template for writing BDD test cases for a user story, which can be defined as:
+
+Feature: Description of the feature
+Scenario:
+Given a certain scenario which is prerequisite
+When an action takes place - Action
+And some more action 
+Then this should be the outcome – Expected Result
+
+A practical example would be:-
+
+Feature:  Check Login Functionality 
+Scenario: 
+Given the login screen is opened
+When user enters username and password
+And clicks on Login Button
+Then user should be navigated to Home Page.
+
+Different BDD Tools:
+
+Cucumber:
+Cucumber is a test framework that supports BDD. In Cucumber, the BDD specifications are written in plain, simple English which is defined by the Gherkin language. In other words, Gherkin is a language that Cucumber understands.
+Specflow:
+Specflow evolved from the Cucumber framework using Ruby on Rails, and is used mainly for .Net projects. SpecFlow also uses the Gherkin language.
+Jbehave
+Test Left
+JDave
