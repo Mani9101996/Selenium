@@ -1,0 +1,35 @@
+Steps to be followed to setup BDD Framework:
+
+1. Create a Maven Project
+
+2. Add dependencies - Selenium java, webdrivermanager, cucumber-java, junit, cucumber-junit 
+
+3. Create Features folder in src/test/resources
+
+4. Create a new feature file. extension is .feature
+
+5. Install Cucumber Eclipse plug-in or natural plug-in and Restart the eclipse.
+
+6. Create a new feature file to get all the options
+
+7. Write Scenarios in feature file
+
+8. Run the feature file
+
+9. Create step definition class or glue code under src/test/java package
+
+10. Create a runner package/class
+
+@RunWith(Cucumber.class) 
+
+@CucumberOptions(features="src/test/resources/Features",glue={"com.StepDefinition"}
+
+Please refer below YouTube video:
+
+
+
+What is Cucumber Options? 
+@CucumberOptions are like property files or settings for your test. Basically @CucumberOptions enables us to do all the things that we could have done if we have used cucumber command line.
+
+
+
