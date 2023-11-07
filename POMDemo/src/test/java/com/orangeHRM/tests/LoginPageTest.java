@@ -35,10 +35,10 @@ public class LoginPageTest {
 	
 	 @Test
 	 public void verifyLogin() {
-	 
 	  homepage =  loginPage.login("Admin", "admin123");
 	  String actualURL= driver.getCurrentUrl();
-	  String expectedURL= "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
+	  System.out.println("URL is:" +actualURL);
+	  String expectedURL= "https://s1.demo.opensourcecms.com/wordpress/wp-login.php";
 	  Assert.assertEquals(actualURL, expectedURL);
 	 }
 	 

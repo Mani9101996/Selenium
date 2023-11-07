@@ -2,23 +2,23 @@
 <testng-results ignored="0" total="2" passed="0" failed="1" skipped="1">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-11-01T22:59:02 IST" name="Default suite" finished-at="2023-11-01T22:59:07 IST" duration-ms="5190">
+  <suite started-at="2023-11-03T14:54:50 IST" name="Default suite" finished-at="2023-11-03T14:54:55 IST" duration-ms="5020">
     <groups>
     </groups>
-    <test started-at="2023-11-01T22:59:02 IST" name="Default test" finished-at="2023-11-01T22:59:07 IST" duration-ms="5190">
+    <test started-at="2023-11-03T14:54:50 IST" name="Default test" finished-at="2023-11-03T14:54:55 IST" duration-ms="5020">
       <class name="com.orangeHRM.tests.LoginPageTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:02 IST" name="setUp" finished-at="2023-11-01T22:59:06 IST" duration-ms="4411" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:50 IST" name="setUp" finished-at="2023-11-03T14:54:55 IST" duration-ms="4323" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyLogin()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:06 IST" name="verifyLogin" finished-at="2023-11-01T22:59:07 IST" duration-ms="644" status="FAIL">
+        <test-method signature="verifyLogin()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:55 IST" name="verifyLogin" finished-at="2023-11-03T14:54:55 IST" duration-ms="582" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "org.openqa.selenium.WebDriver.getCurrentUrl()" because "com.orangeHRM.tests.LoginPageTest.driver" is null]]>
             </message>
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException: Cannot invoke "org.openqa.selenium.WebDriver.getCurrentUrl()" because "com.orangeHRM.tests.LoginPageTest.driver" is null
-at com.orangeHRM.tests.LoginPageTest.verifyLogin(LoginPageTest.java:40)
+at com.orangeHRM.tests.LoginPageTest.verifyLogin(LoginPageTest.java:39)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -53,7 +53,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyLogin -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:07 IST" name="tearDown" finished-at="2023-11-01T22:59:07 IST" duration-ms="1" status="FAIL">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:55 IST" name="tearDown" finished-at="2023-11-03T14:54:55 IST" duration-ms="0" status="FAIL">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "org.openqa.selenium.WebDriver.close()" because "com.orangeHRM.tests.LoginPageTest.driver" is null]]>
@@ -100,11 +100,11 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:07 IST" name="setUp" finished-at="2023-11-01T22:59:07 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:55 IST" name="setUp" finished-at="2023-11-03T14:54:55 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyLogo()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:07 IST" name="verifyLogo" finished-at="2023-11-01T22:59:07 IST" duration-ms="0" status="SKIP">
+        <test-method signature="verifyLogo()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:55 IST" name="verifyLogo" finished-at="2023-11-03T14:54:55 IST" duration-ms="1" status="SKIP">
           <exception class="java.lang.NullPointerException">
             <message>
               <![CDATA[Cannot invoke "org.openqa.selenium.WebDriver.close()" because "com.orangeHRM.tests.LoginPageTest.driver" is null]]>
@@ -151,7 +151,7 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyLogo -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-01T22:59:07 IST" name="tearDown" finished-at="2023-11-01T22:59:07 IST" duration-ms="0" status="SKIP">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:com.orangeHRM.tests.LoginPageTest@4a883b15]" started-at="2023-11-03T14:54:55 IST" name="tearDown" finished-at="2023-11-03T14:54:55 IST" duration-ms="0" status="SKIP">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
