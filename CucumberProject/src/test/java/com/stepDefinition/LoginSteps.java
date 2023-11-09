@@ -29,9 +29,8 @@ public void user_is_on_login_page() {
 public void user_enters_username_and_password() {
 //	this.driver = driver;
 	System.out.println("Step2: User enters Username and Password");
-	driver.findElement(By.id("user_email_login")).sendKeys("Admin");
-	driver.findElement(By.id("user_password")).sendKeys("admin123");
-	
+	driver.findElement(By.xpath("//input[@id='user_email_login']")).sendKeys("Admin");
+	driver.findElement(By.xpath("//input[@id='user_password']")).sendKeys("admin123");	
 }
 
 @And("click on login button")
