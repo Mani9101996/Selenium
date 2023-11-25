@@ -18,21 +18,23 @@ public class WindowHandle {
 		WebDriver driver = new EdgeDriver();
 		driver.manage().window().maximize();
 		
-		driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+	//	driver.get("https://www.automationtestinginsider.com/2019/08/textarea-textarea-element-defines-multi.html");
+		driver.get("https://www.naukri.com/");
+	
 		Thread.sleep(3000);
 		
 		String ParentWindowID = driver.getWindowHandle();
 		System.out.println("the parentwindowid is:"+ ParentWindowID);
 		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,4000)", 0);
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//		js.executeScript("window.scrollBy(0,4100)", 0);
 //		WebElement ele = driver.findElement(By.xpath("//button[@id='windowhandling1']"));
 //		ele.click();
 		
-		driver.findElement(By.xpath("//button[@id='windowhandling1']")).click();
-		driver.findElement(By.xpath("//button[@id='windowhandling1']")).click();
-		driver.findElement(By.xpath("//button[@id='windowhandling1']")).click();
-
+		driver.findElement(By.xpath("//a[@href='https://www.naukri.com/mnc-jobs?src=discovery_trendingWdgt_homepage_srch']")).click();
+		driver.findElement(By.xpath("//span[@title='Startup']")).click();
+		driver.findElement(By.xpath("//span[@title='Fortune 500']")).click();
+		
 		Thread.sleep(3000);
 		
 
@@ -52,7 +54,7 @@ public class WindowHandle {
 				System.out.println("child window url is:" + driver.getCurrentUrl());
 				System.out.println(("child window title is:" + driver.getTitle()));
 				
-				driver.findElement(By.xpath("//input[@id='searchInput']")).sendKeys("selenium testing");
+				//driver.findElement(By.xpath("//input[@id='searchInput']")).sendKeys("selenium testing");
 				Thread.sleep(3000);
 				driver.close();
 			}
