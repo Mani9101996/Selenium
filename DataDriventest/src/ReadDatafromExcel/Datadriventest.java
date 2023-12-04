@@ -59,7 +59,7 @@ public class Datadriventest {
 
 		      driver.findElement(By.xpath("//input[@name='Register']")).click();
 
-		      driver.get("http://localhost:8084/KothaAbhishekProject/");
+		      driver.get("http://localhost:8084/ManiProject/");
 
 		    }
 		    driver.close();
