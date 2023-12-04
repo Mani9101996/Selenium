@@ -1,0 +1,369 @@
+*********Launch WebBrowser**********
+
+  public static void main(String[] args) {
+   WebDriver driver;
+     System.setProperty("webdriver.chrome.driver", pathToGeckoDriver + "\\edgedriver.exe");
+    driver = new FirefoxDriver();
+    driver.get("http://automationtestinginsider.com");
+    driver.quit();
+   
+   ------------------------------------------------------------------
+ findElement():findElement() is used to find the first element in the current web page matching to the specified locator value  
+				WebElement element = driver.findElements(By.xpath(“//div[@id=’example’]//ul//li”));
+findElements():findElements() is used to find all the elements in the current web page matching to the specified locator value.
+				List <WebElement> elementList = driver.findElements(By.xpath(“//div[@id=’example’]//ul//li”));
+   ------------------------------------------------------------------
+  How can you find whether an element is displayed on the screen using Selenium?
+
+WebDriver facilitates the user with the following methods to check the visibility of the web elements.   
+	isDisplayed()
+	isSelected()
+	isEnabled()
+   ------------------------------------------------------------------
+    How can we get a text on a web element using Selenium?
+ 
+ Using getText() method.
+String  eleText= driver.findElement(By.xpath(“ ”)).getText();  
+  ------------------------------------------------------------------ 
+    How to type into a text box using Selenium?
+  
+  User can use sendKeys(“String to be entered”) to enter the string in the textbox.
+		WebElement username= driver.findElement(By.id("uname"));
+		username.sendKeys("testusername");
+------------------------------------------------------------------
+    How to select a check box in Selenium?
+    
+	WebElement option1 = driver.findElement(By.id("checkbox123"));                                     
+	option1.click();
+	
+	How to select all the check boxes in a page?
+	
+	List<WebElement> list = driver.findElements(By.Xpath("//input[type='checkbox']"));
+	for(WebElement el : list){
+    if(!el.isSelected()) // validate Checked property, otherwise you'll uncheck!
+        el.click();
+}
+   ------------------------------------------------------------------
+   How to press enter key in selenium
+
+	driver.findElement(By.id("Value")).sendKeys(Keys.ENTER);
+   ------------------------------------------------------------------
+    How to enter input in textbox without using sendkeys
+
+	JavascriptExecutor JS = (JavascriptExecutor)webdriver;
+	JS.executeScript("document.getElementById('User').value='admin'");
+	JS.executeScript("document.getElementById('Password').value='password123'");	
+   ------------------------------------------------------------------
+  How to get no of frame present
+  
+  List<WebElement> iframList = driver.findElements(By.tagName("iframe"));
+  int totalFrames = iframList.size();
+  System.out.println("No of Frames:" + totalFrames);
+   ------------------------------------------------------------------
+   How to verify whether the checkbox option or radio button is selected or not?
+
+String str = driver.findElement(By.id("26110162")).getAttribute("checked");
+if (str.equalsIgnoreCase("true"))
+{
+    System.out.println("Checkbox selected");
+}   
+   ------------------------------------------------------------------
+   What is the alternative way to click on login button?
+   
+   use submit() method but it can be used only when attribute type=submit.
+   ------------------------------------------------------------------
+   How to handle a drop-down field and select a value from it using Selenium?
+   
+   Value in the drop down can be selected using WebDriver’s Select class.
+Syntax:
+selectByValue:
+	Select selectByValue = new Select(driver.findElement(By.id(“SelectID_One”)));
+	selectByValue.selectByValue(“greenvalue”);
+selectByVisibleText:
+	Select selectByVisibleText = new Select (driver.findElement(By.id(“SelectID_Two”)));
+	selectByVisibleText.selectByVisibleText(“Lime”);
+selectByIndex:
+	Select selectByIndex = new Select(driver.findElement(By.id(“SelectID_Three”)));
+	selectByIndex.selectByIndex(2);
+   
+   ------------------------------------------------------------------
+   How to check which option in the drop-down is selected?
+   
+   You should be able to get the text using getText() (for the option element you got using getFirstSelectedOption()
+   
+Select select = new Select(driver.findElement(By.xpath("//select")));
+WebElement option = select.getFirstSelectedOption();
+String defaultItem = option.getText();
+System.out.println(defaultItem );
+   ------------------------------------------------------------------
+ How to find more than one web element in to a list?
+
+At times, we may come across elements of same type like multiple hyperlinks, images etc arranged in an ordered or unordered list.
+ Thus, it makes absolute sense to deal with such elements by a single piece of code and this can be done using WebElement List.
+
+List <WebElement> elementList = driver.findElements(By.xpath("//div[@id='example']//ul//li"));
+int listSize = elementList.size();
+for (int i=0; i<listSize; i++)
+{
+serviceProviderLinks.get(i).click();
+driver.navigate().back();
+} 
+   ------------------------------------------------------------------
+    How to handle frames in WebDriver?
+   
+   An inline frame acronym as iframe is used to insert another document with in the current HTML document or simply a web page into a web page by enabling nesting.
+		Select iframe by id
+				driver.switchTo().frame(“ID of the frame“);
+				driver.switchTo().frame(driver.findElements(By.tagName(“iframe”).get(0));
+			
+		Locating iframe using index--frame(index)
+				Example:
+				driver.switchTo().frame(0);
+				frame(Name of Frame)
+				driver.switchTo().frame(“name of the frame”);
+				frame(WebElement element)
+		Select Parent Window
+				driver.switchTo().defaultContent();
+   ------------------------------------------------------------------
+   How can we handle web-based pop up using Selenium?
+
+Answer:  WebDriver offers the users with a very efficient way to handle these pop ups using Alert interface. 
+There are the four methods that we would be using along with the Alert interface.
+				
+				• void dismiss() – The accept() method clicks on the “Cancel” button as soon as the pop up window appears.
+				• void accept() – The accept() method clicks on the “Ok” button as soon as the pop up window appears.
+				• String getText() – The getText() method returns the text displayed on the alert box.
+				• void sendKeys(String stringToSend) – The sendKeys() method enters the specified string pattern into the alert box.
+
+Syntax:
+				Alert alert = driver.switchTo().alert();
+				alert.accept();
+   ------------------------------------------------------------------
+   How to assert title of the web page?
+   
+   assertTrue(“The title of the window is incorrect.”,driver.getTitle().equals(“Title of the page”));
+   ------------------------------------------------------------------
+   How to mouse hover on a web element using WebDriver?
+
+   Action Interface is one such utility which simulates the single user interactions.
+	we have used Action Interface to mouse hover on a drop down which then opens a list of options.
+
+Sample Code:
+
+				Actions actions=new Actions(driver);
+				actions.moveToElement(driver.findElement(By.id("id of the dropdown"))).perform();
+				WebElement subLinkOption=driver.findElement(By.id("id of the sub link"));
+				subLinkOption.click();
+   ------------------------------------------------------------------
+   How to capture screen-shot in Selenium WebDriver ?
+   
+                File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+                FileUtils.copyFile(scrFile, newFile("C:\\CaptureScreenshot\\google.jpg"));                 
+   ------------------------------------------------------------------
+   How to clear the text inside the text box fields using Selenium WebDriver with out clear method? 
+
+   
+   WebElement box = driver.findElement(By.name("q"));
+
+        box.sendKeys(input);
+        Thread.sleep(5000); 
+        box.sendKeys(Keys.chord(Keys.CONTROL,"a"));
+        box.sendKeys(Keys.BACK_SPACE);
+   
+   ------------------------------------------------------------------
+   
+   ------------------------------------------------------------------
+   
+   ------------------------------------------------------------------
+   
+   ------------------------------------------------------------------
+   
+   ------------------------------------------------------------------
+   What are the types of exceptions which will appear while finding elements?
+
+Answer:
+1. ElementNotVisibleException - This type of Selenium exception occurs when an existing element in DOM has a feature set as hidden.
+2. ElementNotSelectableException - This Selenium exception occurs when an element is presented in the DOM, but you can be able to select. 
+									Therefore, it is not possible to interact.
+3. NoSuchElementException - This Exception occurs if an element could not be found in DOM.
+4. StaleElementReferenceException  - This Selenium exception occurs when the web element is detached from the current DOM.
+5. ElementNotInteractableException - This Selenium exception is thrown when any element is presented in the DOM. 
+										However, it is impossible to interact with such an element.
+6. ElementNotVisibleException - If selenium tries to find an element but the element is not visible within the page
+7. NoSuchAttributeException - While trying to get attribute value but the attribute is not available in DOM.
+   ------------------------------------------------------------------
+  What is StaleElementException? When does it occur? How do you handle it?
+
+Stale means old, decayed, no longer fresh. Stale Element means an old element or no longer available element. 
+The two reasons for Stale element reference are
+
+The element has been deleted entirely.
+The element is no longer attached to the DOM.
+
+Solution 1:
+The Most way to handle this is to refresh the page, On refreshing it, most of the time driver found the element, But it’s not the perfect solution.
+Driver.navigate().refersh();
+Driver.findElement(By.name(“name”)).click();
+Driver.navigate().refersh();
+Driver.findElement(By.name(“name”)).click();
+
+Solution 2:
+If an element is not attached to DOM then you could try using ‘try-catch block’ within ‘for loop’
+// Using for loop, it tries for 3 times.
+// If the element is located for the first time then it breaks from the for loop nad comeout of the loop
+for(int i=0; i<=2;i++){
+  try{
+     driver.findElement(By.xpath("xpath")).click();
+     break;
+  }
+  catch(Exception e){
+     Sysout(e.getMessage());
+  }
+}  
+   ------------------------------------------------------------------
+   1. What are the different types of Exceptions in Selenium?
+
+Answer:  During automation in Selenium WebDriver, we come across various exceptions & we need to deal with them. Below is the list of various exceptions occur in selenium webdriver.
+There are main three types of Exceptions in Selenium WebDriver –
+Checked Exceptions – These Exceptions can be handled during compile time. If they are not handled, it gives compile time error. Example- FileNotFoundException, IOException etc.
+Unchecked Exceptions – These exceptions can not be handled during compile time & they got caught at run time. Example – ArrayIndexOutOfBoundException.
+Error – Errors which can not be handled by using even try catch block. Example -Assertion Error.
+
+Common Exceptions in Selenium
+1. ElementNotVisibleException - This type of Selenium exception occurs when an existing element in DOM has a feature set as hidden.
+2. ElementNotSelectableException - This Selenium exception occurs when an element is presented in the DOM, but you can be able to select. 
+Therefore, it is not possible to interact.
+3. NoSuchElementException - This Exception occurs if an element could not be found in DOM.
+4. NoSuchFrameException - This Exception occurs if the frame target to be switched to does not exist.
+5. NoAlertPresentException - This Exception occurs when you switch to no presented alert.
+6. NoSuchWindowException - This Exception occurs if the window target to be switch does not exist.
+7. StaleElementReferenceException  - This Selenium exception occurs when the web element is detached from the current DOM.
+8. SessionNotFoundException - The WebDriver is acting after you quit the browser.
+9. TimeoutException - Thrown when there is not enough time for a command to be completed. For Example, the element searched wasn't found in the specified time.
+10. WebDriverException - This Exception takes place when the WebDriver is acting right after you close the browser.
+11. ConnectionClosedException - This type of Exception takes place when there is a disconnection in the driver.
+12. ElementNotInteractableException - This Selenium exception is thrown when any element is presented in the DOM.However, it is impossible to interact with such an element.
+13. InvalidArgumentException - It occurs when an argument does not belong to the expected type.
+14. SessionNotCreatedException - It happens when a new session could not be successfully created.
+15. ElementNotVisibleException - If selenium tries to find an element but the element is not visible within the page
+16. NoSuchAttributeException - While trying to get attribute value but the attribute is not available in DOM.
+   ------------------------------------------------------------------
+ Diff between classnotfound exception and nodeffoundexception?
+
+ClassNotFoundException is an exception that occurs when you try to load a class at run time using Class.
+forName() or loadClass() methods and mentioned classes are not found in the classpath. 
+NoClassDefFoundError is an error that occurs when a particular class is present at compile time, but was missing at run time.
+ClassNotFoundException is raised in below program as class “ATI” is not found in classpath.  
+   ------------------------------------------------------------------
+   What do we mean by Selenium 1, Selenium 2 and Selenium 3?
+   
+   Selenium 1 = Selenium IDE + Selenium RC + Selenium Grid---(decided to merge both Selenium WebDriver and Selenium RC )
+   Selenium 2 = Selenium IDE + Selenium WebDriver 2.x + Selenium Grid.---(decided to completely remove the dependency for Selenium RC)
+   Selenium 3 = Selenium IDE + Selenium WebDriver 3.x + Selenium Grid.---(implementation and replacing with one backed by WebDriver and more improvements.)
+   ------------------------------------------------------------------
+   Is WebDriver a class or interface?
+
+WebDriver is an Interface,and we are defining a reference variable(driver) whose type is an interface.
+Now any object we assign to it must be an instance of a class(FireFoxDriver) that implements the interface. 
+   ------------------------------------------------------------------
+   What is the super interface of WebDriver ?
+
+Answer:  SearchContext is the super most interface in selenium, which is extended by another interface called WebDriver. 
+All the abstract methods of SearchContext and WebDriver interfaces are implemented in RemoteWebDriver class.
+------------------------------------------------------------------
+What are the different types of navigation commands in WebDriver?
+driver.navigate().to("www.automationtestinginsider.com"); 
+driver.navigate().back();
+driver.navigate().forward(); 
+driver.navigate().refresh();
+------------------------------------------------------------------
+What is the difference between Assert and Verify commands?
+
+In case of the “Assert” command, as soon as the validation fails the execution of that particular test method is stopped and the test method is marked as failed.
+ Whereas, in case of “Verify”, the test method continues execution even after the failure of an assertion statement.
+ 
+Assert
+We use Assert when we have to validate critical functionality, failing of which makes the execution of further statements irrelevant.
+Hence, the test method is aborted as soon as failure occurs.
+
+Verify
+At times, we might require the test method to continue execution even after the failure of the assertion statements. In TestNG, Verify is implemented using SoftAssert class.
+In case of SoftAssert, all the statements in the test method are executed (including multiple assertions).
+------------------------------------------------------------------
+What are locators, different types of locators that can be used in Selenium and their priorities?
+
+ Locators provide a way to access the HTML elements from a web page.
+ Locators can be classified into two categories:
+Structure-based locators: locators that rely on the structure of the page to find elements.
+      --XPath
+      --CSS
+Attributes-based locators: locators that relies on the attributes of the elements to locate them
+      --Id
+      --Name
+      --Link
+      --CSS
+------------------------------------------------------------------
+What is the difference between ‘/’ and ‘//’ in XPath?
+
+Answer: 
+Single Slash “/” – Single slash is used to create Xpath with absolute path i.e.
+ the xpath would be created to start selection from the document node/start node.
+Double Slash “//” – Double slash is used to create Xpath with relative path i.e. 
+the xpath would be created to start selection from anywhere within the document.
+------------------------------------------------------------------
+What is the difference between Absolute and Relative XPath? Give examples?
+
+XPath (XML Path Language) is a query language for selecting nodes from an XML document.In addition, XPath may be used to compute values from the content of an XML document.
+Pros - Allows very precise locators
+Cons - XPath engines are different in each browser, hence make them inconsistent across browsers. 
+That means if you write XPath for your application in Chrome browser, it may not work on IE.
+ 
+Absolute XPath :- It starts with the root node or a forward slash (/). The advantage of using absolute is, it identifies the element very fast.
+Disadvantage is, if any thing goes wrong like some other tag added or removed in between, then this path will no longer works. 
+------------------------------------------------------------------
+
+ Why CSS Selectors have higher priority over XPath Expressions?
+ 
+ Below are the reasons why CSS Selectors need to be considered over XPath Expressions:
+ When compared to XPath Expressions, CSS Selectors locate the UI elements faster.
+ Selenium may not be able to locate few UI elements using XPath Expressions while executing the Automation scripts on Internet Explorer Browser.
+CSS is faster. It also improves the performance. It is very compatible across browsers.CSS is best for IE as XPath does not work in IE always.
+
+------------------------------------------------------------------
+How can we locate elements using their text in XPath?
+
+Answer:  You can try creating xpath using text() function like below:
+//span[contains(text(),'Users')]
+//span[contains(text(),'Contents')]
+
+13. How can we move to parent of an element using XPath?
+
+Answer:  Use “//ancestor::” to move to parent node like this
+Find the element of Search and the xpath is “//span[text()='Search']”
+the we want to move the parent node of this node
+and the xpath is “//span[text()='Search']//ancestor::ul”
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
