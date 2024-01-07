@@ -1,0 +1,50 @@
+Implicit wait:--
+
+In Selenium, **implicit wait** is a type of wait that instructs the web driver to wait for a certain amount of time before throwing a "No Such Element Exception" ¹. 
+The default setting is 0 seconds. Once we set the time, the web driver will wait for the element for that time before throwing an exception ¹.
+ Implicit wait is used to provide a default waiting time between each consecutive test step/command across the entire test script ⁴. It is useful when the elements which we want to interact with may load at different time intervals, making it difficult to identify the element . 
+
+ we can use the `implicitlyWait()` method, which is part of the `WebDriver` class.
+
+Syntax:-- driver.manage().timeouts.implicitlywait(10,timeunit.seconds)
+driver.get (\"http://somedomain/url_that_delays_loading\"); 
+WebElement myDynamicElement = driver.findElement (By.id (\"myDynamicElement\")); 
+
+In the above example, the `implicitly_wait()` method is used to set the implicit wait time to 10 seconds ². This means that if the element is not located on the web page within that time frame, it will throw an exception  .
+------------------------------------------------
+Explicit wait:---
+In Selenium, **explicit wait** is a type of wait that instructs the web driver to wait until a certain condition is met or maximum time is elapsed ¹². Unlike **implicit waits**, explicit waits are not applied globally, they are more specific and allow the web driver to wait for a certain condition for a particular element before throwing an error ². 
+
+We can use the `WebDriverWait` class, which is part of the `selenium.webdriver.support.ui` module.
+
+Syntax:-
+WebDriverWait wait = new            WebDriverWait(WebDriverRefrence,20);
+WebElement aboutMe;
+aboutMe= wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("about_me")));
+
+In the above example, the `WebDriverWait` class is used to set the maximum wait time to 10 seconds ². The `presence_of_element_located()` method is used to specify the condition to wait for, which is the presence of an element with the ID-         'about me'. The `until()` method is used to wait until the condition is met or the maximum wait time is exceeded.
+------------------------------------------------
+Main differences:--
+
+1)Explicit wait applies to a specific element only, while implicit wait applies to all the elements in the script.
+2)Explicit wait waits for a specific condition, such as the presence or the clickability of an element, while implicit wait waits for an element to appear on the page.
+3)Explicit wait requires specifying the expected condition and the maximum time to wait, while implicit wait requires only setting the time once for the whole script.
+4)Explicit wait is more flexible and precise, while implicit wait is more general and simple.
+------------------------------------------------
+Fluent wait:--
+
+Fluent wait is a type of explicit wait in Selenium WebDriver that allows us to specify the maximum amount of time to wait for a condition, as well as the frequency and the exceptions to ignore while checking the condition. Fluent wait is more flexible and customizable than implicit wait or regular explicit wait. Fluent wait is implemented using the FluentWait class in Java
+
+
+WebDriver driver = new ChromeDriver (); 
+driver.get (\"http://somedomain/url_that_delays_loading\"); 
+
+Wait<WebDriver> wait = new FluentWait<WebDriver> (driver) 
+  .withTimeout (Duration.ofSeconds (10)) 
+  .pollingEvery (Duration.ofSeconds (1)) 
+  .ignoring (NoSuchElementException.class); 
+
+WebElement myDynamicElement = wait.until (new Function<WebDriver, WebElement
+  public WebElement apply (WebDriver driver) {
+  return driver.findElement (By.id (\"myDynamicElement}});
+------------------------------------------------

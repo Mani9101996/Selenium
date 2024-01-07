@@ -1,0 +1,13 @@
+The this keyword in selenium java is a reference variable that refers to the current object of a method or a constructor. It is used to avoid the confusion between the instance variables and the parameters that have the same name, and to access the members of the current class¹². For example, if you have a class called Test with a constructor that takes two parameters, you can use the this keyword to assign the values of the parameters to the instance variables of the same name:
+
+```java
+class Test {
+  int x, y;
+  Test(int x, int y) {
+    this.x = x; // this.x refers to the instance variable x
+    this.y = y; // this.y refers to the instance variable y
+  }
+}
+```
+
+The this keyword can also be used to invoke other methods or constructors of the same class, or to pass the current object as an argument to another method or constructor.

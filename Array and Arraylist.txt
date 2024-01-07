@@ -1,0 +1,50 @@
+ArrayList is a **class** that implements the List interface in Java¹². It is a part of the collection framework that provides the functionality of a dynamic array. An interface is a blueprint of a class that defines the methods and variables that a class must implement, but does not provide any implementation. A class can implement multiple interfaces, but can only extend one class. Therefore, ArrayList is a class, not an interface. 
+--------------------------------------------------
+Source: Conversation with Bing, 1/7/2024
+(1) ArrayList in Java - GeeksforGeeks. https://www.geeksforgeeks.org/arraylist-in-java/.
+(2) ArrayList in Java - javatpoint. https://www.javatpoint.com/java-arraylist.
+(3) Interfaces in Java | InfoWorld. https://www.infoworld.com/article/3171300/java-101-interfaces-in-java.html.
+
+An array and an ArrayList are two different data structures in Java that have some similarities and some differences. Here are some of the main points to compare them:
+
+- An array is a fixed-size data structure that can store elements of the same type, either primitive or object. An ArrayList is a variable-size collection class that can only store objects, using autoboxing for primitive types.
+- An array is a basic functionality provided by Java, while an ArrayList is part of the collection framework in java.util package. Therefore, array elements are accessed using `[]`, while ArrayList has a set of methods to access and modify elements, such as `get()`, `set()`, `add()`, `remove()`, etc.
+- An array does not have many built-in features, while an ArrayList provides more flexibility and functionality, such as resizing, sorting, searching, etc. However, an array is more efficient in terms of memory and performance, as it does not have the overhead of wrapper classes and extra methods.
+
+For example, here is how to create, initialize, and print an array and an ArrayList of integers in Java:
+
+```java
+// Creating an array of size 5
+int[] arr = new int[5];
+
+// Initializing the array elements
+arr[0] = 10;
+arr[1] = 20;
+arr[2] = 30;
+arr[3] = 40;
+arr[4] = 50;
+
+// Printing the array elements
+System.out.println(Arrays.toString(arr));
+
+// Creating an ArrayList of initial capacity 5
+ArrayList<Integer> arrL = new ArrayList<Integer>(5);
+
+// Adding elements to the ArrayList
+arrL.add(10);
+arrL.add(20);
+arrL.add(30);
+arrL.add(40);
+arrL.add(50);
+
+// Printing the ArrayList elements
+System.out.println(arrL);
+```
+
+Output:
+
+```java
+[10, 20, 30, 40, 50]
+[10, 20, 30, 40, 50]
+```
+

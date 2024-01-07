@@ -1,0 +1,25 @@
+A framework in selenium is a code structure that makes code maintenance easy and efficient for automation testing of web applications. It helps to organize the code and data separately, and to reuse and read the code easily.
+
+There are different types of Selenium frameworks, each with its own benefits and drawbacks. Here is a brief overview of some of the most common ones:
+
+- **Linear Scripting Framework**:
+ This is a basic level test automation framework that is implemented in the form of “Record and Playback” and is executed linearly. The benefits of this framework are that it is easy to create and execute, and it does not require any programming skills. However, the drawbacks are that it is not reusable, maintainable, or scalable, and it does not support data-driven testing or cross-browser testing¹.
+
+- **Modular Testing Framework**: 
+This is a framework that divides the application under test into smaller modules or functions, and creates separate test scripts for each module. The benefits of this framework are that it improves code reusability, readability, and maintainability, and it reduces script duplication and complexity. However, the drawbacks are that it does not support data-driven testing or cross-browser testing, and it requires more effort and time to create and execute².
+
+- **Library Architecture Testing Framework**:
+ This is a framework that is similar to the modular testing framework, but it also creates a common library of functions that can be used by multiple test scripts. The benefits of this framework are that it further enhances code reusability, readability, and maintainability, and it reduces script duplication and complexity. However, the drawbacks are that it does not support data-driven testing or cross-browser testing, and it requires more effort and time to create and execute².
+
+- **Data-driven Framework**: 
+This is a framework that separates the test data from the test logic, and stores the test data in external sources such as Excel files, CSV files, databases, etc. The benefits of this framework are that it supports data-driven testing, which means that the same test script can be executed with multiple sets of data, and it reduces the number of test scripts and enhances test coverage. However, the drawbacks are that it does not support cross-browser testing, and it requires more effort and time to create and execute, and to manage the test data².
+
+- **Keyword Driven Testing Framework**: 
+This is a framework that separates the test logic from the test data, and stores the test logic in external sources such as Excel files, CSV files, databases, etc. The test logic consists of keywords that represent the actions or operations to be performed on the application under test. The benefits of this framework are that it supports data-driven testing and keyword-driven testing, which means that the test scripts can be created and executed without any programming skills, and it enhances test readability and maintainability. However, the drawbacks are that it does not support cross-browser testing, and it requires more effort and time to create and execute, and to manage the test logic and data².
+
+- **Hybrid Driven Testing Framework**: 
+This is a framework that combines the features of two or more frameworks, such as data-driven, keyword-driven, modular, etc. The benefits of this framework are that it supports data-driven testing, keyword-driven testing, and cross-browser testing, and it provides more flexibility and customization to the test scripts. However, the drawbacks are that it requires more effort and time to create and execute, and it requires more technical skills and expertise².
+
+- **Behavior Driven Development Testing Framework**: This is a framework that follows the principles of behavior driven development (BDD), which is a software development methodology that focuses on the behavior and expectations of the end users. The test scripts are written in a natural language that is understandable by both technical and non-technical stakeholders, such as Gherkin. The benefits of this framework are that it supports BDD testing, which means that the test scripts are aligned with the user requirements and expectations, and it improves test readability and communication. However, the drawbacks are that it requires more effort and time to create and execute, and it requires additional tools and libraries to support the natural language syntax².
+
+
